@@ -5,89 +5,116 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+import javax.swing.JButton;
+
 import model.ProductModel;
-import view.forms.AdminView;
+
+import view.forms.MainView;
 import view.forms.LoginView;
 
-public class AdminController implements ActionListener{
-	private AdminView adminView;
-	private LoginView loginView;
+public class AdminController implements ActionListener {
+	private MainView mv;
+	private LoginView lv;
 	private ProductModel productModel;
 	
 	
 	
-
-	public AdminController(AdminView adminView,LoginView loginView, ProductModel productModel) {
-		this.adminView = adminView;
-		this.loginView = loginView;
-		this.productModel = productModel;
-		this.adminView.addActionListener(this);
-		this.loginView.addActionListener(this);
-	}
-
-
-
-
+	
+	
+	public AdminController(MainView mv,LoginView lv,ProductModel productModel) {
+			
+			this.mv = mv;
+			this.lv = lv;
+			this.productModel = productModel;
+			this.mv.addActionListener(this);
+			this.lv.addActionListener(this);
+			
+			lv.Bsignup.addActionListener((e)->{
+				lv.CardPanel_login.removeAll();
+				lv.CardPanel_login.add(lv.Psignup);
+				lv.CardPanel_login.repaint();
+				lv.CardPanel_login.revalidate();
+			});
+			lv.BloginSU.addActionListener((e)->{
+				lv.CardPanel_login.removeAll();
+				lv.CardPanel_login.add(lv.Plogin);
+				lv.CardPanel_login.repaint();
+				lv.CardPanel_login.revalidate();
+			});
+			
+			mv.BdashboardForm.addActionListener((e)->{
+				mv.CardPanel.removeAll();
+				mv.CardPanel.add(mv.DashboardPanel);
+				mv.CardPanel.repaint();
+				mv.CardPanel.revalidate();
+			});
+			mv.BproductForm.addActionListener((e)->{
+				mv.CardPanel.removeAll();
+				mv.CardPanel.add(mv.ProductPanel);
+				mv.CardPanel.repaint();
+				mv.CardPanel.revalidate();
+			});
+			mv.BsettingForm.addActionListener((e)->{
+				mv.CardPanel.removeAll();
+				mv.CardPanel.add(mv.SettingPanel);
+				mv.CardPanel.repaint();
+				mv.CardPanel.revalidate();
+			});
+			mv.BhomeForm.addActionListener((e)->{
+				mv.CardPanel.removeAll();
+				mv.CardPanel.add(mv.HomePanel);
+				mv.CardPanel.repaint();
+				mv.CardPanel.revalidate();
+			});
+			
+			mv.Bsignout.addActionListener((e)->{
+				mv.setVisible(false);
+				lv.setVisible(true);
+			});
+		}
+	
+	
+	
+	
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		switchPanel(e);
-		manageProduct(e);
 		checkLogin(e);
 		
-	}
-	
-	private void manageProduct(ActionEvent e) {
-		if(e.getSource()==adminView.Badd) {
-			System.out.println("Add");
-		}
-		if(e.getSource()==adminView.Bremove) {
-			System.out.println("Remove");
-		}
-		if(e.getSource()==adminView.Bupdate) {
-			System.out.println("Update");
-		}
+		
 		
 	}
 	
 	
-	private void switchPanel(ActionEvent e) {
-		if(e.getSource()== adminView.BdashboardForm) {
-			adminView.CardPanel.removeAll();
-			adminView.CardPanel.add(adminView.DashboardPanel);
-			adminView.CardPanel.repaint();
-			adminView.CardPanel.revalidate();
-		}
-		if(e.getSource()== adminView.BproductForm) {
-			adminView.CardPanel.removeAll();
-			adminView.CardPanel.add(adminView.ProductPanel);
-			adminView.CardPanel.repaint();
-			adminView.CardPanel.revalidate();
-		}
-		if(e.getSource()== adminView.BsettingForm) {
-			adminView.CardPanel.removeAll();
-			adminView.CardPanel.add(adminView.SettingPanel);
-			adminView.CardPanel.repaint();
-			adminView.CardPanel.revalidate();
-		}
-		if(e.getSource()== adminView.BinvoiceForm) {
-			adminView.CardPanel.removeAll();
-			adminView.CardPanel.add(adminView.InvoicePanel);
-			adminView.CardPanel.repaint();
-			adminView.CardPanel.revalidate();
-		}
-		if(e.getSource()==adminView.Bsignout) {
-			adminView.setVisible(false);
-			loginView.setVisible(true);
-		}
+	
+	public void switchPanel(ActionEvent e) {
+		//-------------Main--------------------------//
+		
+		
+		//-------------------Login---------------------------//
+		
+		
+		
+		
 	}
 	
-	private void checkLogin(ActionEvent e) {
-		if(e.getSource()==loginView.Blogin) {
-			this.loginView.setVisible(false);
-			this.adminView.setVisible(true);
+	
+	public void checkLogin(ActionEvent e) {
+		if(e.getSource()==lv.Blogin) {
+			mv.CardPanel.removeAll();
+			mv.CardPanel.add(mv.HomePanel);
+			mv.CardPanel.repaint();
+			mv.CardPanel.revalidate();
+			lv.setVisible(false);
+			mv.setVisible(true);
 			
 		}
 	}
+	
+
+	
+	
+
 	
 	
 	

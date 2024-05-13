@@ -1,75 +1,81 @@
 package model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
 
+import javax.persistence.*;
+import javax.xml.bind.annotation.XmlElement;
 
+@Entity
+@Table(name = "product")
 public class ProductModel {
-	private Integer ProductID;
-	private String ProductName;
-	private boolean ProductCategory;
-	private float ProductPrice;
-	private boolean ProductStatus;
-	
-	public ProductModel() {
-		
-	}
 
-	public ProductModel(Integer productID, String productName, boolean productCategory, float productPrice,
-			boolean productStatus) {
-		
-		ProductID = productID;
-		ProductName = productName;
-		ProductCategory = productCategory;
-		ProductPrice = productPrice;
-		ProductStatus = productStatus;
-	}
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "ID")
+    private Integer productID;
+    
+    
+    
+    @Column(name = "Name")    
+    private String productName;
+    
+    @Column(name = "Category")
+    private Boolean productCategory;
+    
+    @Column(name = "Price")
+    private int productPrice;
+    
+    @Column(name = "Status")
+    private Boolean productStatus;
 
-	public Integer getProductID() {
-		return ProductID;
-	}
+    public ProductModel() {
+    }
 
-	public void setProductID(Integer productID) {
-		ProductID = productID;
-	}
+    public ProductModel(Integer productID, String productName, Boolean productCategory, int productPrice,
+                        Boolean productStatus) {
+        this.productID = productID;
+        this.productName = productName;
+        this.productCategory = productCategory;
+        this.productPrice = productPrice;
+        this.productStatus = productStatus;
+    }
 
-	public String getProductName() {
-		return ProductName;
-	}
+    public Integer getProductID() {
+        return productID;
+    }
 
-	public void setProductName(String productName) {
-		ProductName = productName;
-	}
+    public void setProductID(Integer productID) {
+        this.productID = productID;
+    }
 
-	public boolean isProductCategory() {
-		return ProductCategory;
-	}
+    public String getProductName() {
+        return productName;
+    }
 
-	public void setProductCategory(boolean productCategory) {
-		ProductCategory = productCategory;
-	}
+    public void setProductName(String productName) {
+        this.productName = productName;
+    }
 
-	public float getProductPrice() {
-		return ProductPrice;
-	}
+    public Boolean isProductCategory() {
+        return productCategory;
+    }
 
-	public void setProductPrice(float productPrice) {
-		ProductPrice = productPrice;
-	}
+    public void setProductCategory(Boolean productCategory) {
+        this.productCategory = productCategory;
+    }
 
-	public boolean isProductStatus() {
-		return ProductStatus;
-	}
+    public int getProductPrice() {
+        return productPrice;
+    }
 
-	public void setProductStatus(boolean productStatus) {
-		ProductStatus = productStatus;
-	}
-	
-	
-	
+    public void setProductPrice(int productPrice) {
+        this.productPrice = productPrice;
+    }
 
-	
+    public Boolean isProductStatus() {
+        return productStatus;
+    }
 
+    public void setProductStatus(Boolean productStatus) {
+        this.productStatus = productStatus;
+    }
 }

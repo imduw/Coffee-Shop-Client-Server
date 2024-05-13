@@ -39,41 +39,48 @@ import java.awt.event.ActionEvent;
 
 
 
-public class AdminView extends JFrame {
+public class MainView extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-	private JScrollPane ListProduct;
-	private JTable ListTable;
-	private JTextField IPsearch;
-	private JScrollPane ListProductToInvoice;
-	private JTable ListInvoice;
-	private JScrollPane ListProduct_1;
-	private JTable ListTable_1;
-	private JTextField IPsearch_1;
-	private JTextField IPproduct;
-	private JTextField IPprice;
+	public JScrollPane ListProduct;
+	public JTable Table_dasboard;
+	public JTextField IPsearch_dashboard;
+	public JScrollPane ListProductToInvoice;
+	public JTable Table_invoice;
+	public JScrollPane ListTable_product;
+	public JTable Table_product;
+	public JTextField IPsearch_product;
+	public JTextField IPproduct;
+	public JTextField IPprice;
 	public JButton BdashboardForm;
 	public JButton BsettingForm;
-	public JButton BorderForm;
+	public JButton BhomeForm;
 	public JButton BproductForm;
 	public JButton BinvoiceForm;
 	public JPanel CardPanel;
 	public JPanel DashboardPanel;
 	public JPanel ProductPanel;
 	public JPanel SettingPanel;
-	public JPanel InvoicePanel;
+	public JPanel HomePanel;
 	public JButton BcheckOut;
-	public JButton BSearch;
-	public JButton BSearch_1;
 	public JButton Badd;
-	public JButton Bremove;
+	public JButton Bdelete;
 	public JButton Bupdate;
 	public JButton Bsignout;
+	public ButtonGroup group_category;
+	public ButtonGroup group_status;
+	public JRadioButton RBavailable;
+	public JRadioButton RBdrink;
+	public JRadioButton RBfood;
+	public JRadioButton RBnotAvailable;
+	public JLabel LBwarning;
+	public JLabel LBnotificate;
+	public JButton Brefresh;
 	
 
 	
-	public AdminView() {
+	public MainView() {
 		
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -121,36 +128,36 @@ public class AdminView extends JFrame {
 		LBnameshop.setBounds(62, 22, 168, 30);
 		MenuPanel.add(LBnameshop);
 		
-		BorderForm = new JButton("   Order");
-		BorderForm.addActionListener(new ActionListener() {
+		BhomeForm = new JButton("   Home");
+		BhomeForm.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		BorderForm.addMouseListener(new MouseAdapter() {
+		BhomeForm.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent e) {
-            	BorderForm.setBackground(new Color(20, 23, 24)); 
-            	BorderForm.setForeground(new Color(28,233,255));
+            	BhomeForm.setBackground(new Color(20, 23, 24)); 
+            	BhomeForm.setForeground(new Color(28,233,255));
             }
 
             @Override
             public void mouseExited(MouseEvent e) {
-            	BorderForm.setBackground(new Color(32, 36, 38));
-            	BorderForm.setForeground(new Color(195, 195, 195));
+            	BhomeForm.setBackground(new Color(32, 36, 38));
+            	BhomeForm.setForeground(new Color(195, 195, 195));
             }
         });
 
-		BorderForm.setFocusable(false);
-		BorderForm.setMargin(new Insets(2, 14, 0, 14));
-		BorderForm.setForeground(new Color(195, 195, 195));
-		BorderForm.setBorderPainted(false);
-		BorderForm.setFont(new Font("Visby Round CF", Font.PLAIN, 14));
-		BorderForm.setHorizontalAlignment(SwingConstants.LEADING);
-		BorderForm.setBackground(new Color(32, 36, 38));
-		BorderForm.setBounds(0, 190, 233, 45);
-		BorderForm.setIcon(new ImageIcon(
-				Toolkit.getDefaultToolkit().createImage(LoginView.class.getResource("/image/order.png"))));
-		MenuPanel.add(BorderForm);
+		BhomeForm.setFocusable(false);
+		BhomeForm.setMargin(new Insets(2, 20, 0, 14));
+		BhomeForm.setForeground(new Color(195, 195, 195));
+		BhomeForm.setBorderPainted(false);
+		BhomeForm.setFont(new Font("Visby Round CF", Font.PLAIN, 14));
+		BhomeForm.setHorizontalAlignment(SwingConstants.LEADING);
+		BhomeForm.setBackground(new Color(32, 36, 38));
+		BhomeForm.setBounds(0, 133, 233, 45);
+		BhomeForm.setIcon(new ImageIcon(
+				Toolkit.getDefaultToolkit().createImage(LoginView.class.getResource("/image/home1.png"))));
+		MenuPanel.add(BhomeForm);
 		
 		BdashboardForm = new JButton("    Dashboard");
 		BdashboardForm.addMouseListener(new MouseAdapter() {
@@ -177,7 +184,7 @@ public class AdminView extends JFrame {
 		BdashboardForm.setFont(new Font("Visby Round CF", Font.PLAIN, 14));
 		BdashboardForm.setBorderPainted(false);
 		BdashboardForm.setBackground(new Color(32, 36, 38));
-		BdashboardForm.setBounds(6, 134, 226, 45);
+		BdashboardForm.setBounds(7, 190, 226, 45);
 		BdashboardForm.setIcon(new ImageIcon(
 				Toolkit.getDefaultToolkit().createImage(LoginView.class.getResource("/image/product.png"))));
 		MenuPanel.add(BdashboardForm);
@@ -273,32 +280,6 @@ public class AdminView extends JFrame {
 				Toolkit.getDefaultToolkit().createImage(LoginView.class.getResource("/image/exit.png"))));
 		MenuPanel.add(Bsignout);
 		
-		JLabel LBlogoclient = new JLabel("");
-		LBlogoclient.setBounds(192, 660, 32, 36);
-		MenuPanel.add(LBlogoclient);
-		LBlogoclient.setIcon(new ImageIcon(
-				Toolkit.getDefaultToolkit().createImage(LoginView.class.getResource("/image/unknown.png"))));
-		
-		JLabel LBnameclient = new JLabel("admin");
-		LBnameclient.setBounds(14, 671, 168, 18);
-		MenuPanel.add(LBnameclient);
-		LBnameclient.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseEntered(MouseEvent e) {
-				LBnameclient.setForeground(new Color(28,233,255));
-				
-			}
-			@Override
-			public void mouseExited(MouseEvent e) {
-				
-				LBnameclient.setForeground(new Color(245, 245, 245));
-			}
-		});
-		LBnameclient.setHorizontalAlignment(SwingConstants.RIGHT);
-		LBnameclient.setBackground(new Color(238, 240, 240));
-		LBnameclient.setForeground(new Color(245, 245, 245));
-		LBnameclient.setFont(new Font("Visby Round CF ExtraBold", Font.BOLD, 16));
-		
 		CardPanel = new JPanel();
 		CardPanel.setBackground(new Color(20, 23, 24));
 		CardPanel.setBounds(233, 0, 1101, 798);
@@ -314,52 +295,61 @@ public class AdminView extends JFrame {
 		//------------------------------------------Table ở Dashboard------------------------------------------------------------------------------------//
 		
 		ListProduct = new JScrollPane();
+		ListProduct.getVerticalScrollBar().setBackground(new Color(20,23,24));
 		ListProduct.setBorder(new LineBorder(new Color(32, 36, 38), 10, true));
 		ListProduct.setBackground(new Color(20, 23, 24));
-		ListProduct.setBounds(55, 129, 682, 534);
+		ListProduct.setBounds(52, 130, 645, 479);
 		DashboardPanel.add(ListProduct);
 		
-		ListTable = new JTable();
-		ListTable.setFocusable(false);
-		ListTable.setRowMargin(0);
-		ListTable.setGridColor(new Color(128, 128, 128));
-		ListTable.setSelectionForeground(new Color(48, 200, 200));
-		ListTable.setForeground(new Color(255, 255, 255));
-		ListTable.setBackground(new Color(128, 128, 128));
-		ListTable.setSelectionBackground(new Color(40, 40, 40));
-		ListTable.setFont(new Font("Bahnschrift", Font.PLAIN, 16));
-		ListTable.setRowHeight(50);
-		ListTable.setModel(
-				new DefaultTableModel(new Object[][] {}, new String[] { "ID", "Product", "Category", "Price" }) {
-					boolean[] columnEditables = new boolean[] { false, false, false, false };
-
-					public boolean isCellEditable(int row, int column) {
-						return columnEditables[column];
-					}
-				});
-		ListTable.getColumnModel().getColumn(0).setResizable(false);
-		ListTable.getColumnModel().getColumn(0).setPreferredWidth(43);
-		ListTable.getColumnModel().getColumn(1).setResizable(false);
-		ListTable.getColumnModel().getColumn(1).setPreferredWidth(108);
-		ListTable.getColumnModel().getColumn(2).setResizable(false);
-		ListTable.getColumnModel().getColumn(2).setPreferredWidth(98);
-		ListTable.getColumnModel().getColumn(3).setResizable(false);
-		ListTable.getColumnModel().getColumn(3).setPreferredWidth(88);
-		ListProduct.setViewportView(ListTable);
+		Table_dasboard = new JTable();
+		Table_dasboard.setBorder(new LineBorder(new Color(32, 36, 38), 1, true));
+		Table_dasboard.setFocusable(false);
+		Table_dasboard.setRowMargin(0);
+		Table_dasboard.setGridColor(new Color(128, 128, 128));
+		Table_dasboard.setSelectionForeground(new Color(48, 200, 200));
+		Table_dasboard.setForeground(new Color(255, 255, 255));
+		Table_dasboard.setBackground(new Color(128, 128, 128));
+		Table_dasboard.setSelectionBackground(new Color(40, 40, 40));
+		Table_dasboard.setFont(new Font("Visby Round CF ExtraBold", Font.BOLD, 15));
+		Table_dasboard.setRowHeight(50);
+		Table_dasboard.setModel(
+				new DefaultTableModel(
+			new Object[][] {
+			},
+			new String[] {
+				"ID", "Product", "Category", "Price"
+			}
+		) {
+			boolean[] columnEditables = new boolean[] {
+				false, false, false, false
+			};
+			public boolean isCellEditable(int row, int column) {
+				return columnEditables[column];
+			}
+		});
+		Table_dasboard.getColumnModel().getColumn(0).setResizable(false);
+		Table_dasboard.getColumnModel().getColumn(0).setPreferredWidth(37);
+		Table_dasboard.getColumnModel().getColumn(1).setResizable(false);
+		Table_dasboard.getColumnModel().getColumn(1).setPreferredWidth(128);
+		Table_dasboard.getColumnModel().getColumn(2).setResizable(false);
+		Table_dasboard.getColumnModel().getColumn(2).setPreferredWidth(64);
+		Table_dasboard.getColumnModel().getColumn(3).setResizable(false);
+		Table_dasboard.getColumnModel().getColumn(3).setPreferredWidth(112);
+		ListProduct.setViewportView(Table_dasboard);
 		
-		JTableHeader header_product = ListTable.getTableHeader();		
+		JTableHeader header_product = Table_dasboard.getTableHeader();		
 		header_product.setResizingAllowed(false);		
 		header_product.setReorderingAllowed(false);
 		header_product.setDefaultRenderer(new view.renderers.CustomTableHeaderRenderer());
 		JViewport viewport = ListProduct.getViewport();
 		viewport.setBackground(new Color(20, 23, 24));
-		ListTable.setDefaultRenderer(Object.class, new view.renderers.StripedTableCellRenderer());
+		Table_dasboard.setDefaultRenderer(Object.class, new view.renderers.CustomTableCellRenderer());
 		CardPanel.add(DashboardPanel);
 		
 		//------------------------------------------------------------------------------------------------------------------------------//
 		
 		JPanel invPanel = new JPanel();
-		invPanel.setBackground(new Color(24, 28, 29));
+		invPanel.setBackground(new Color(20, 23, 24));
 		invPanel.setBounds(794, 0, 307, 824);
 		DashboardPanel.add(invPanel);
 		invPanel.setLayout(null);
@@ -369,19 +359,19 @@ public class AdminView extends JFrame {
 		ListProductToInvoice = new JScrollPane();
 		ListProductToInvoice.setBorder(new LineBorder(new Color(32, 36, 38), 6, true));
 		ListProductToInvoice.setBackground(new Color(28, 32, 34));
-		ListProductToInvoice.setBounds(19,60, 300, 460); //38, 65, 286, 460
+		ListProductToInvoice.setBounds(10,127, 286, 419); //38, 65, 286, 460
 		
-		ListInvoice = new JTable();
-		ListInvoice.setFocusable(false);
-		ListInvoice.setRowMargin(0);
-		ListInvoice.setGridColor(new Color(128, 128, 128));
-		ListInvoice.setSelectionForeground(new Color(48, 200, 200));
-		ListInvoice.setForeground(new Color(255, 255, 255));
-		ListInvoice.setBackground(new Color(128, 128, 128));
-		ListInvoice.setSelectionBackground(new Color(40, 40, 40));
-		ListInvoice.setFont(new Font("Bahnschrift", Font.PLAIN, 16));
-		ListInvoice.setRowHeight(50);
-		ListInvoice.setModel(
+		Table_invoice = new JTable();
+		Table_invoice.setFocusable(false);
+		Table_invoice.setRowMargin(0);
+		Table_invoice.setGridColor(new Color(128, 128, 128));
+		Table_invoice.setSelectionForeground(new Color(48, 200, 200));
+		Table_invoice.setForeground(new Color(255, 255, 255));
+		Table_invoice.setBackground(new Color(128, 128, 128));
+		Table_invoice.setSelectionBackground(new Color(40, 40, 40));
+		Table_invoice.setFont(new Font("Visby Round CF ExtraBold", Font.BOLD, 15));
+		Table_invoice.setRowHeight(50);
+		Table_invoice.setModel(
 				new DefaultTableModel(
 			new Object[][] {
 			},
@@ -396,21 +386,21 @@ public class AdminView extends JFrame {
 				return columnEditables[column];
 			}
 		});
-		ListInvoice.getColumnModel().getColumn(0).setResizable(false);
-		ListInvoice.getColumnModel().getColumn(0).setPreferredWidth(89);
-		ListInvoice.getColumnModel().getColumn(1).setResizable(false);
-		ListInvoice.getColumnModel().getColumn(1).setPreferredWidth(52);
-		ListInvoice.getColumnModel().getColumn(2).setResizable(false);
-		ListProductToInvoice.setViewportView(ListInvoice);
+		Table_invoice.getColumnModel().getColumn(0).setResizable(false);
+		Table_invoice.getColumnModel().getColumn(0).setPreferredWidth(89);
+		Table_invoice.getColumnModel().getColumn(1).setResizable(false);
+		Table_invoice.getColumnModel().getColumn(1).setPreferredWidth(52);
+		Table_invoice.getColumnModel().getColumn(2).setResizable(false);
+		ListProductToInvoice.setViewportView(Table_invoice);
 		
-		JTableHeader header_invoice = ListInvoice.getTableHeader();		
+		JTableHeader header_invoice = Table_invoice.getTableHeader();		
 		header_invoice.setResizingAllowed(false);		
 		header_invoice.setReorderingAllowed(false);
 		header_invoice.setDefaultRenderer(new view.renderers.CustomTableHeaderRenderer());
 		JViewport viewport1 = ListProductToInvoice.getViewport();
 		viewport1.setBackground(new Color(20, 23, 24));
-		ListInvoice.setDefaultRenderer(Object.class, new view.renderers.StripedTableCellRenderer());
-		ListProductToInvoice.setBounds(10, 54, 286, 492);
+		Table_invoice.setDefaultRenderer(Object.class, new view.renderers.CustomTableCellRenderer());
+		ListProductToInvoice.setBounds(10, 127, 286, 400);
 		invPanel.add(ListProductToInvoice);
 		
 		//----------------------------------------------------------------------------------------------------------------//
@@ -423,7 +413,7 @@ public class AdminView extends JFrame {
 		LBtotaltext.setBounds(19, 563, 76, 28);
 		invPanel.add(LBtotaltext);
 		
-		JLabel LBtotal = new JLabel("20000000");
+		JLabel LBtotal = new JLabel(". . .");
 		LBtotal.setHorizontalAlignment(SwingConstants.RIGHT);
 		LBtotal.setForeground(new Color(245, 245, 245));
 		LBtotal.setFont(new Font("Visby Round CF", Font.PLAIN, 19));
@@ -472,130 +462,120 @@ public class AdminView extends JFrame {
 		
 		//-----------------------------------------------------------------------------------------------------------------------//
 		
-		IPsearch = new JTextField();
-		IPsearch.setCaretColor(new Color(240, 240, 240));
-		IPsearch.addMouseListener(new MouseAdapter() {
+		IPsearch_dashboard = new JTextField();
+		IPsearch_dashboard.setCaretColor(new Color(240, 240, 240));
+		IPsearch_dashboard.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				IPsearch.setText("");
-				IPsearch.setCaretColor(new Color(240,240,240));
+				IPsearch_dashboard.setText("");
+				IPsearch_dashboard.setCaretColor(new Color(240,240,240));
 			}
 			@Override
 			public void mouseExited(MouseEvent e) {
-				IPsearch.setText("Search");
-				IPsearch.setCaretPosition(0);
-				IPsearch.setCaretColor(new Color(20,23,24));
+				IPsearch_dashboard.setText("Search");
+				IPsearch_dashboard.setCaretPosition(0);
+				IPsearch_dashboard.setCaretColor(new Color(20,23,24));
 			}
 		});
-		IPsearch.setFont(new Font("Visby Round CF ExtraBold", Font.PLAIN, 14));
-		IPsearch.setForeground(new Color(240, 240, 240));
-		IPsearch.setText("Search");
-		IPsearch.setBorder(new MatteBorder(0, 0, 2, 0, (Color) new Color(230, 230, 230)));
-		IPsearch.setBackground(new Color(20, 23, 24));
-		IPsearch.setBounds(190, 56, 345, 40);
-		IPsearch.setCaretColor(new Color(20,23,24));
-		DashboardPanel.add(IPsearch);
-		IPsearch.setColumns(10);
-		
-		BSearch = new JButton("");
-		BSearch.setFocusable(false);
-		BSearch.setBorderPainted(false);
-		BSearch.setBackground(new Color(20, 23, 24));
-		BSearch.setHorizontalAlignment(SwingConstants.CENTER);
-		BSearch.setIcon(new ImageIcon(
-				Toolkit.getDefaultToolkit().createImage(LoginView.class.getResource("/image/glass1.png"))));
-		BSearch.setBounds(553, 50, 48, 47);
-		DashboardPanel.add(BSearch);
+		IPsearch_dashboard.setFont(new Font("Visby Round CF ExtraBold", Font.PLAIN, 14));
+		IPsearch_dashboard.setForeground(new Color(240, 240, 240));
+		IPsearch_dashboard.setText("Search");
+		IPsearch_dashboard.setBorder(new MatteBorder(0, 0, 2, 0, (Color) new Color(230, 230, 230)));
+		IPsearch_dashboard.setBackground(new Color(20, 23, 24));
+		IPsearch_dashboard.setBounds(190, 56, 381, 40);
+		IPsearch_dashboard.setCaretColor(new Color(20,23,24));
+		DashboardPanel.add(IPsearch_dashboard);
+		IPsearch_dashboard.setColumns(10);
 		
 		ProductPanel = new JPanel();
 		ProductPanel.setBackground(new Color(20, 23, 24));
 		CardPanel.add(ProductPanel, "name_18041534092000");
 		ProductPanel.setLayout(null);
 		//------------------------------------Table ở ProductPanel------------------------------------------------------------------------------------------//
-		ListProduct_1 = new JScrollPane();
-		ListProduct_1.setBorder(new LineBorder(new Color(32, 36, 38), 10, true));
-		ListProduct_1.setBackground(new Color(20, 23, 24));
-		ListProduct_1.setBounds(55, 130, 682, 606);
-		ProductPanel.add(ListProduct_1);
+		ListTable_product = new JScrollPane();
+		//ListTable_product.getVerticalScrollBar().setBackground(new Color(20,23,24));
+		ListTable_product.setBorder(new LineBorder(new Color(32, 36, 38), 10, true));
+		ListTable_product.setBackground(new Color(20, 23, 24));
+		ListTable_product.setBounds(55, 130, 682, 606);
+		ProductPanel.add(ListTable_product);
 		
-		ListTable_1 = new JTable();
-		ListTable_1.setFocusable(false);
-		ListTable_1.setRowMargin(0);
-		ListTable_1.setGridColor(new Color(128, 128, 128));
-		ListTable_1.setSelectionForeground(new Color(48, 200, 200));
-		ListTable_1.setForeground(new Color(255, 255, 255));
-		ListTable_1.setBackground(new Color(128, 128, 128));
-		ListTable_1.setSelectionBackground(new Color(40, 40, 40));
-		ListTable_1.setFont(new Font("Bahnschrift", Font.PLAIN, 16));
-		ListTable_1.setRowHeight(50);
-		ListTable_1.setModel(
-				new DefaultTableModel(new Object[][] {}, new String[] { "ID", "Product", "Category", "Price" }) {
-					boolean[] columnEditables = new boolean[] { false, false, false, false };
-
-					public boolean isCellEditable(int row, int column) {
-						return columnEditables[column];
-					}
-				});
-		ListTable_1.getColumnModel().getColumn(0).setResizable(false);
-		ListTable_1.getColumnModel().getColumn(0).setPreferredWidth(43);
-		ListTable_1.getColumnModel().getColumn(1).setResizable(false);
-		ListTable_1.getColumnModel().getColumn(1).setPreferredWidth(108);
-		ListTable_1.getColumnModel().getColumn(2).setResizable(false);
-		ListTable_1.getColumnModel().getColumn(2).setPreferredWidth(98);
-		ListTable_1.getColumnModel().getColumn(3).setResizable(false);
-		ListTable_1.getColumnModel().getColumn(3).setPreferredWidth(88);
-		ListProduct_1.setViewportView(ListTable_1);
+		Table_product = new JTable();
+		Table_product.setFocusable(false);
+		Table_product.setRowMargin(0);
+		Table_product.setGridColor(new Color(128, 128, 128));
+		Table_product.setSelectionForeground(new Color(50, 210, 210));
+		Table_product.setForeground(new Color(255, 255, 255));
+		Table_product.setBackground(new Color(128, 128, 128));
+		Table_product.setSelectionBackground(new Color(40, 40, 40));
+		Table_product.setFont(new Font("Bahnschrift", Font.PLAIN, 16));
+		Table_product.setRowHeight(50);
+		Table_product.setModel(
+				new DefaultTableModel(
+			new Object[][] {
+			},
+			new String[] {
+				"ID", "Product", "Category", "Price", "Status"
+			}
+		) {
+			boolean[] columnEditables = new boolean[] {
+				false, false, false, false, false
+			};
+			public boolean isCellEditable(int row, int column) {
+				return columnEditables[column];
+			}
+		});
+		Table_product.getColumnModel().getColumn(0).setResizable(false);
+		Table_product.getColumnModel().getColumn(0).setPreferredWidth(32);
+		Table_product.getColumnModel().getColumn(1).setResizable(false);
+		Table_product.getColumnModel().getColumn(2).setResizable(false);
+		Table_product.getColumnModel().getColumn(2).setPreferredWidth(55);
+		Table_product.getColumnModel().getColumn(3).setResizable(false);
+		Table_product.getColumnModel().getColumn(3).setPreferredWidth(59);
+		Table_product.getColumnModel().getColumn(4).setResizable(false);
+		Table_product.getColumnModel().getColumn(4).setPreferredWidth(60);
+		ListTable_product.setViewportView(Table_product);
 		
-		JTableHeader header_product_1 = ListTable_1.getTableHeader();		
+		JTableHeader header_product_1 = Table_product.getTableHeader();		
 		header_product_1.setResizingAllowed(false);		
 		header_product_1.setReorderingAllowed(false);
 		header_product_1.setDefaultRenderer(new view.renderers.CustomTableHeaderRenderer());
-		JViewport viewport_1 = ListProduct_1.getViewport();
+		JViewport viewport_1 = ListTable_product.getViewport();
 		viewport_1.setBackground(new Color(20, 23, 24));
-		ListTable_1.setDefaultRenderer(Object.class, new view.renderers.StripedTableCellRenderer());
+		Table_product.setDefaultRenderer(Object.class, new view.renderers.CustomTableCellRenderer());
 		CardPanel.add(DashboardPanel);
 		
 		//-----------------------------------------------------------------------------------------------------------------------------------------//
 		
-		IPsearch_1 = new JTextField();
-		IPsearch_1.setCaretColor(new Color(240, 240, 240));
-		IPsearch_1.addMouseListener(new MouseAdapter() {
+		IPsearch_product = new JTextField();
+		IPsearch_product.setCaretColor(new Color(240, 240, 240));
+		IPsearch_product.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				IPsearch_1.setText("");
-				IPsearch_1.setCaretColor(new Color(240,240,240));
+				IPsearch_product.setText("");
+				IPsearch_product.setCaretColor(new Color(240,240,240));
 			}
 			@Override
 			public void mouseExited(MouseEvent e) {
-				IPsearch_1.setText("Search");
-				IPsearch_1.setCaretPosition(0);
-				IPsearch_1.setCaretColor(new Color(20,23,24));
+				IPsearch_product.setText("Search");
+				IPsearch_product.setCaretPosition(0);
+				IPsearch_product.setCaretColor(new Color(20,23,24));
 			}
 		});
-		IPsearch_1.setFont(new Font("Visby Round CF ExtraBold", Font.PLAIN, 14));
-		IPsearch_1.setForeground(new Color(240, 240, 240));
-		IPsearch_1.setText("Search");
-		IPsearch_1.setBorder(new MatteBorder(0, 0, 2, 0, (Color) new Color(230, 230, 230)));
-		IPsearch_1.setBackground(new Color(20, 23, 24));
-		IPsearch_1.setBounds(190, 56, 345, 40);
-		IPsearch_1.setCaretColor(new Color(20,23,24));
-		ProductPanel.add(IPsearch_1);
-		IPsearch_1.setColumns(10);
-		
-		BSearch_1 = new JButton("");
-		BSearch_1.setFocusable(false);
-		BSearch_1.setBackground(new Color(20, 23, 24));
-		BSearch_1.setBorderPainted(false);
-		BSearch_1.setBounds(540, 51, 48, 47);
-		BSearch_1.setIcon(new ImageIcon(
-				Toolkit.getDefaultToolkit().createImage(LoginView.class.getResource("/image/glass1.png"))));
-		ProductPanel.add(BSearch_1);
+		IPsearch_product.setFont(new Font("Visby Round CF ExtraBold", Font.PLAIN, 14));
+		IPsearch_product.setForeground(new Color(240, 240, 240));
+		IPsearch_product.setText("Search");
+		IPsearch_product.setBorder(new MatteBorder(0, 0, 2, 0, (Color) new Color(230, 230, 230)));
+		IPsearch_product.setBackground(new Color(20, 23, 24));
+		IPsearch_product.setBounds(190, 56, 381, 40);
+		IPsearch_product.setCaretColor(new Color(20,23,24));
+		ProductPanel.add(IPsearch_product);
+		IPsearch_product.setColumns(10);
 		
 		IPproduct = new JTextField();
+		IPproduct.setCaretColor(new Color(255, 255, 255));
 		
 		IPproduct.setFont(new Font("Visby Round CF DemiBold", Font.BOLD, 15));
 		IPproduct.setForeground(new Color(245, 245, 245));
-		IPproduct.setText("Trà đào");
 		IPproduct.setBorder(new MatteBorder(0, 0, 2, 0, (Color) new Color(240, 240, 240)));
 		IPproduct.setBackground(new Color(20, 23, 24));
 		IPproduct.setBounds(875, 186, 187, 24);
@@ -647,7 +627,7 @@ public class AdminView extends JFrame {
 		ProductPanel.add(LBstatus);
 		
 		IPprice = new JTextField();
-		IPprice.setText("100000");
+		IPprice.setCaretColor(new Color(255, 255, 255));
 		IPprice.setForeground(new Color(245, 245, 245));
 		IPprice.setFont(new Font("Visby Round CF DemiBold", Font.BOLD, 15));
 		IPprice.setColumns(10);
@@ -672,7 +652,7 @@ public class AdminView extends JFrame {
 		
 		//----------------------------------------------------------------------------//
 		
-		JRadioButton RBfood = new JRadioButton("  Food");
+		RBfood = new JRadioButton("  Food");
 		RBfood.setFocusable(false);
 		RBfood.setMargin(new Insets(2, 2, 0, 2));
 		RBfood.setForeground(new Color(240, 240, 240));
@@ -682,7 +662,7 @@ public class AdminView extends JFrame {
 		ProductPanel.add(RBfood);
 		
 		
-		JRadioButton RBdrink = new JRadioButton("  Drink");
+		RBdrink = new JRadioButton("  Drink");
 		RBdrink.setFocusable(false);
 		RBdrink.setForeground(UIManager.getColor("Button.background"));
 		RBdrink.setFont(new Font("Visby Round CF ExtraBold", Font.PLAIN, 16));
@@ -690,13 +670,13 @@ public class AdminView extends JFrame {
 		RBdrink.setBounds(888, 343, 174, 23);
 		ProductPanel.add(RBdrink);
 		
-		ButtonGroup group_category = new ButtonGroup();
+		group_category = new ButtonGroup();
 		group_category.add(RBdrink);
 		group_category.add(RBfood);
 		
 		
 		
-		JRadioButton RBavailable = new JRadioButton("  Available");
+		RBavailable = new JRadioButton("  Available");
 		RBavailable.setFocusable(false);
 		RBavailable.setForeground(UIManager.getColor("Button.background"));
 		RBavailable.setFont(new Font("Visby Round CF ExtraBold", Font.PLAIN, 16));
@@ -705,14 +685,13 @@ public class AdminView extends JFrame {
 		ProductPanel.add(RBavailable);
 		
 		
-		JRadioButton RBnotAvailable = new JRadioButton("  Not available");
+		RBnotAvailable = new JRadioButton("  Not available");
 		RBnotAvailable.setFocusable(false);
 		RBnotAvailable.setForeground(UIManager.getColor("Button.background"));
 		RBnotAvailable.setFont(new Font("Visby Round CF ExtraBold", Font.PLAIN, 16));
 		RBnotAvailable.setBackground(new Color(20, 23, 24));
 		RBnotAvailable.setBounds(887, 439, 174, 23);
 		ProductPanel.add(RBnotAvailable);
-		BSearch.setBounds(540, 52, 48, 47);
 		
 		JLabel LBtotaltext_1_1 = new JLabel("DASHBOARD");
 		LBtotaltext_1_1.setHorizontalAlignment(SwingConstants.LEFT);
@@ -722,7 +701,7 @@ public class AdminView extends JFrame {
 		LBtotaltext_1_1.setBounds(298, 13, 154, 32);
 		DashboardPanel.add(LBtotaltext_1_1);
 		
-		ButtonGroup group_status = new ButtonGroup();
+		group_status = new ButtonGroup();
 		group_status.add(RBavailable);
 		group_status.add(RBnotAvailable);
 		
@@ -791,26 +770,26 @@ public class AdminView extends JFrame {
 		Badd.setBounds(759, 519, 101, 30);
 		ProductPanel.add(Badd);
 		
-		Bremove = new JButton("Remove");
-		Bremove.setFocusable(false);
-		Bremove.addMouseListener(new MouseAdapter() {
+		Bdelete = new JButton("Delele");
+		Bdelete.setFocusable(false);
+		Bdelete.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				Bremove.setForeground(new Color(28,233,255));
-				Bremove.setBorderPainted(false);
+				Bdelete.setForeground(new Color(28,233,255));
+				Bdelete.setBorderPainted(false);
 			}
 			@Override
 			public void mouseExited(MouseEvent e) {
-				Bremove.setForeground(new Color(20, 23, 24));
-				Bremove.setBorderPainted(true);
+				Bdelete.setForeground(new Color(20, 23, 24));
+				Bdelete.setBorderPainted(true);
 			}
 		});
-		Bremove.setMargin(new Insets(8, 14, 2, 14));
-		Bremove.setFont(new Font("Visby Round CF Heavy", Font.BOLD, 18));
-		Bremove.setForeground(new Color(20, 23, 24));
-		Bremove.setBackground(new Color(20, 23, 24));
-		Bremove.setBounds(875, 519, 105, 30);
-		ProductPanel.add(Bremove);
+		Bdelete.setMargin(new Insets(8, 14, 2, 14));
+		Bdelete.setFont(new Font("Visby Round CF Heavy", Font.BOLD, 18));
+		Bdelete.setForeground(new Color(20, 23, 24));
+		Bdelete.setBackground(new Color(20, 23, 24));
+		Bdelete.setBounds(875, 519, 105, 30);
+		ProductPanel.add(Bdelete);
 		
 		Bupdate = new JButton("Update");
 		Bupdate.setFocusable(false);
@@ -841,6 +820,43 @@ public class AdminView extends JFrame {
 		LBtotaltext_1_1_1.setBounds(292, 13, 154, 32);
 		ProductPanel.add(LBtotaltext_1_1_1);
 		
+		LBwarning = new JLabel("");
+		LBwarning.setHorizontalAlignment(SwingConstants.CENTER);
+		LBwarning.setBackground(new Color(236, 15, 20));
+		LBwarning.setForeground(new Color(220, 14, 19));
+		LBwarning.setFont(new Font("Bahnschrift", Font.PLAIN, 14));
+		LBwarning.setBounds(747, 597, 344, 30);
+		ProductPanel.add(LBwarning);
+		
+		LBnotificate = new JLabel("");
+		LBnotificate.setHorizontalAlignment(SwingConstants.CENTER);
+		LBnotificate.setForeground(new Color(56, 185, 199));
+		LBnotificate.setFont(new Font("Bahnschrift", Font.PLAIN, 14));
+		LBnotificate.setBackground(new Color(56, 185, 199));
+		LBnotificate.setBounds(747, 630, 344, 30);
+		ProductPanel.add(LBnotificate);
+		
+		Brefresh = new JButton("Refresh");
+		Brefresh.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				Brefresh.setForeground(new Color(28,233,255));
+				Brefresh.setBorderPainted(false);
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				Brefresh.setForeground(new Color(20, 23, 24));
+				Brefresh.setBorderPainted(true);
+			}
+		});
+		Brefresh.setMargin(new Insets(8, 14, 2, 14));
+		Brefresh.setForeground(new Color(20, 23, 24));
+		Brefresh.setFont(new Font("Visby Round CF Heavy", Font.BOLD, 18));
+		Brefresh.setFocusable(false);
+		Brefresh.setBackground(new Color(20, 23, 24));
+		Brefresh.setBounds(875, 568, 105, 30);
+		ProductPanel.add(Brefresh);
+		
 		SettingPanel = new JPanel();
 		SettingPanel.setBackground(new Color(20, 23, 24));
 		CardPanel.add(SettingPanel, "name_25910368055600");
@@ -854,19 +870,37 @@ public class AdminView extends JFrame {
 		LBtotaltext_1_1_2.setBounds(298, 13, 154, 32);
 		SettingPanel.add(LBtotaltext_1_1_2);
 		
-		InvoicePanel = new JPanel();
-		InvoicePanel.setForeground(new Color(58, 197, 193));
-		InvoicePanel.setBackground(new Color(20, 23, 24));
-		CardPanel.add(InvoicePanel, "name_26379143641400");
-		InvoicePanel.setLayout(null);
+		HomePanel = new JPanel();
+		HomePanel.setForeground(new Color(58, 197, 193));
+		HomePanel.setBackground(new Color(20, 23, 24));
+		CardPanel.add(HomePanel, "name_26379143641400");
+		HomePanel.setLayout(null);
 		
-		JLabel LBtotaltext_1_1_1_1 = new JLabel("INVOICE");
-		LBtotaltext_1_1_1_1.setHorizontalAlignment(SwingConstants.CENTER);
-		LBtotaltext_1_1_1_1.setForeground(new Color(56, 185, 199));
-		LBtotaltext_1_1_1_1.setFont(new Font("Visby Round CF ExtraBold", Font.PLAIN, 25));
-		LBtotaltext_1_1_1_1.setBackground(new Color(238, 240, 240));
-		LBtotaltext_1_1_1_1.setBounds(298, 13, 154, 32);
-		InvoicePanel.add(LBtotaltext_1_1_1_1);
+		JLabel LBlogoclient = new JLabel("");
+		LBlogoclient.setBounds(1041, 15, 32, 36);
+		HomePanel.add(LBlogoclient);
+		LBlogoclient.setIcon(new ImageIcon(
+				Toolkit.getDefaultToolkit().createImage(LoginView.class.getResource("/image/unknown.png"))));
+		
+		JLabel LBnameclient = new JLabel("Hello , admin");
+		LBnameclient.setBounds(398, 34, 300, 58);
+		HomePanel.add(LBnameclient);
+		LBnameclient.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				LBnameclient.setForeground(new Color(28,233,255));
+				
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				
+				LBnameclient.setForeground(new Color(245, 245, 245));
+			}
+		});
+		LBnameclient.setHorizontalAlignment(SwingConstants.CENTER);
+		LBnameclient.setBackground(new Color(238, 240, 240));
+		LBnameclient.setForeground(new Color(245, 245, 245));
+		LBnameclient.setFont(new Font("Visby Round CF ExtraBold", Font.BOLD, 33));
 	}
 	//----------------------------------------------------------------------------------------------------------------//
 	public void addActionListener(ActionListener listener) {
@@ -882,12 +916,12 @@ public class AdminView extends JFrame {
       //-----------Manage Product -------------------------//
         
         Badd.addActionListener(listener);
-        Bremove.addActionListener(listener);
+        Bdelete.addActionListener(listener);
         Bupdate.addActionListener(listener);
         
       //---------------------------------------------------//
         BcheckOut.addActionListener(listener);
-        BSearch.addActionListener(listener);
+        
         
     }
 }

@@ -12,6 +12,7 @@ public class HibernateAPI {
 			return new Configuration().configure().buildSessionFactory();
 		} catch (Exception e) {
 			System.out.println("Lỗi không thể tạo SessionFactory");
+			e.printStackTrace();
 			return null;
 		}
 	}
