@@ -39,7 +39,7 @@ public class Main {
 				    AccountDAO accountDAO = new AccountDAO();
 				    AccountController accountController =new AccountController(accountDAO, mainView, loginview);
 					loginview.setVisible(true);
-
+					System.out.println();
 				    
 				} catch (Exception e) {
 					e.printStackTrace();
