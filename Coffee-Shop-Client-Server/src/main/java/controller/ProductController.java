@@ -7,7 +7,7 @@ import java.awt.event.MouseEvent;
 import java.util.List;
 import javax.swing.JButton;
 
-import dao.ProductDAO;
+import DAO.ProductDAO;
 import model.ProductModel;
 import view.forms.MainView;
 import view.forms.LoginView;

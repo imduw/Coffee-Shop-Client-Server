@@ -1,9 +1,9 @@
 package model;
 
 public class InvoiceModel {
-	private int InvoiceID;
+	private Integer InvoiceID;
 	private String InvoiceCreator;
-	private float InvoiceTotal;
+	private Integer InvoiceTotal;
 	private String InvoiceDate;
 	
 }

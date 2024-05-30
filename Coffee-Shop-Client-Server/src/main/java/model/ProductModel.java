@@ -22,7 +22,7 @@ public class ProductModel {
     private Boolean productCategory;
     
     @Column(name = "Price")
-    private int productPrice;
+    private Integer productPrice;
     
     @Column(name = "Status")
     private Boolean productStatus;
@@ -30,7 +30,7 @@ public class ProductModel {
     public ProductModel() {
     }
 
-    public ProductModel(Integer productID, String productName, Boolean productCategory, int productPrice,
+    public ProductModel(Integer productID, String productName, Boolean productCategory, Integer productPrice,
                         Boolean productStatus) {
         this.productID = productID;
         this.productName = productName;
@@ -63,11 +63,11 @@ public class ProductModel {
         this.productCategory = productCategory;
     }
 
-    public int getProductPrice() {
+    public Integer getProductPrice() {
         return productPrice;
     }
 
-    public void setProductPrice(int productPrice) {
+    public void setProductPrice(Integer productPrice) {
         this.productPrice = productPrice;
     }
 

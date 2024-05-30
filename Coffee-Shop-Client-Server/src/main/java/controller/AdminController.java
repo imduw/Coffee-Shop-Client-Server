@@ -18,7 +18,7 @@ public class AdminController implements ActionListener {
 	private ProductModel productModel;
 	
 	
-	
+
 	
 	
 	public AdminController(MainView mv,LoginView lv,ProductModel productModel) {
@@ -70,7 +70,11 @@ public class AdminController implements ActionListener {
 			mv.Bsignout.addActionListener((e)->{
 				mv.setVisible(false);
 				lv.setVisible(true);
+				
+			
 			});
+			
+	
 		}
 	
 	
@@ -78,38 +82,16 @@ public class AdminController implements ActionListener {
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		switchPanel(e);
-		checkLogin(e);
-		
 		
 		
 	}
 	
 	
 	
-	public void switchPanel(ActionEvent e) {
-		//-------------Main--------------------------//
-		
-		
-		//-------------------Login---------------------------//
-		
-		
-		
-		
-	}
+
 	
 	
-	public void checkLogin(ActionEvent e) {
-		if(e.getSource()==lv.Blogin) {
-			mv.CardPanel.removeAll();
-			mv.CardPanel.add(mv.HomePanel);
-			mv.CardPanel.repaint();
-			mv.CardPanel.revalidate();
-			lv.setVisible(false);
-			mv.setVisible(true);
-			
-		}
-	}
+	
 	
 
 	

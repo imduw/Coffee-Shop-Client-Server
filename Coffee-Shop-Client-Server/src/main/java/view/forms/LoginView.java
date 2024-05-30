@@ -33,12 +33,12 @@ import java.awt.event.ActionEvent;
 
 
 public class LoginView extends JFrame {
-	private JTextField IPuser;
-	private JPasswordField IPpassword;
-	private JTextField IPuserSU;
-	private JPasswordField IPpasswordSU;
-	private JPasswordField IPpasswordSU2;
-	private JTextField IPemailSU;
+	public JTextField IPusername;
+	public JPasswordField IPpassword;
+	public JTextField IPuserSU;
+	public JPasswordField IPpasswordSU;
+	public JPasswordField IPpasswordSU2;
+	public JTextField IPemailSU;
 	public JButton Blogin;
 	public JButton BsignupSU;
 	public JButton Bsignup;
@@ -46,6 +46,8 @@ public class LoginView extends JFrame {
 	public JPanel Plogin;
 	public JPanel CardPanel_login;
 	public JButton BloginSU;
+	public JLabel LBwarning_login;
+	public JLabel LBwarningSU;
 	public LoginView() {
 		
 		
@@ -93,17 +95,17 @@ public class LoginView extends JFrame {
 		LBpassword.setIcon(new ImageIcon(
 				Toolkit.getDefaultToolkit().createImage(LoginView.class.getResource("/image/password.png"))));
 		
-		IPuser = new JTextField();
-		IPuser.setCaretColor(new Color(255, 255, 255));
-		IPuser.setHorizontalAlignment(SwingConstants.LEFT);
-		IPuser.setFont(new Font("Visby Round CF", Font.PLAIN, 15));
-		IPuser.setForeground(new Color(255, 255, 255));
-		IPuser.setColumns(10);
-		IPuser.setBorder(new MatteBorder(0, 0, 2, 0, (Color) new Color(255, 255, 255)));
-		IPuser.setBackground(new Color(30, 39, 49));
-		IPuser.setBounds(86, 210, 276, 36);
+		IPusername = new JTextField();
+		IPusername.setCaretColor(new Color(255, 255, 255));
+		IPusername.setHorizontalAlignment(SwingConstants.LEFT);
+		IPusername.setFont(new Font("Visby Round CF", Font.PLAIN, 15));
+		IPusername.setForeground(new Color(255, 255, 255));
+		IPusername.setColumns(10);
+		IPusername.setBorder(new MatteBorder(0, 0, 2, 0, (Color) new Color(255, 255, 255)));
+		IPusername.setBackground(new Color(30, 39, 49));
+		IPusername.setBounds(86, 210, 276, 36);
 		
-		PloginArea.add(IPuser);
+		PloginArea.add(IPusername);
 		
 		IPpassword = new JPasswordField();
 		IPpassword.setCaretColor(new Color(255, 255, 255));
@@ -136,12 +138,12 @@ public class LoginView extends JFrame {
 		Bsignup.setFocusable(false);
 		PloginArea.add(Bsignup);
 		
-		JLabel lblUserAccountOr_1 = new JLabel("User account or password incorrect");
-		lblUserAccountOr_1.setHorizontalAlignment(SwingConstants.CENTER);
-		lblUserAccountOr_1.setForeground(new Color(255, 255, 255));
-		lblUserAccountOr_1.setFont(new Font("Visby Round CF DemiBold", Font.PLAIN, 13));
-		lblUserAccountOr_1.setBounds(20, 339, 383, 14);
-		PloginArea.add(lblUserAccountOr_1);
+		LBwarning_login = new JLabel("");
+		LBwarning_login.setHorizontalAlignment(SwingConstants.CENTER);
+		LBwarning_login.setForeground(new Color(236, 15, 20));
+		LBwarning_login.setFont(new Font("Visby Round CF DemiBold", Font.PLAIN, 13));
+		LBwarning_login.setBounds(20, 339, 383, 14);
+		PloginArea.add(LBwarning_login);
 		Plogin.add(LBimage);
 		
 		CardPanel_login = new JPanel();
@@ -259,15 +261,15 @@ public class LoginView extends JFrame {
 		IPemailSU.setBounds(100, 135, 275, 41);
 		Psu.add(IPemailSU);
 		
-		JLabel lblUserAccountOr = new JLabel("User account or password incorrect");
-		lblUserAccountOr.setHorizontalAlignment(SwingConstants.CENTER);
-		lblUserAccountOr.setForeground(new Color(255, 255, 255));
-		lblUserAccountOr.setFont(new Font("Visby Round CF DemiBold", Font.PLAIN, 13));
-		lblUserAccountOr.setBounds(19, 403, 399, 21);
-		Psu.add(lblUserAccountOr);
+		LBwarningSU = new JLabel("User account or password incorrect");
+		LBwarningSU.setHorizontalAlignment(SwingConstants.CENTER);
+		LBwarningSU.setForeground(new Color(236, 15, 20));
+		LBwarningSU.setFont(new Font("Visby Round CF DemiBold", Font.PLAIN, 13));
+		LBwarningSU.setBounds(19, 403, 399, 21);
+		Psu.add(LBwarningSU);
 		Plogin.add(LBimage);
 		
-		//Blogin.addActionListener(ac);
+		
 		
 		
 	}

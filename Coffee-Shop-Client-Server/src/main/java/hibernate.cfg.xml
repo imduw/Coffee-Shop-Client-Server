@@ -20,6 +20,7 @@
         
         <!-- Enable Hibernate's automatic session context management -->
         <property name="current_session_context_class">thread</property>
+       
         <property name="hibernate.hbm2ddl.auto">update</property>
         
         <!-- Disable the second-level cache -->
@@ -30,5 +31,6 @@
         
         <!-- Mapping files -->
         <mapping class="model.ProductModel"/>
+        <mapping class="model.AccountModel"/>
     </session-factory>
 </hibernate-configuration>

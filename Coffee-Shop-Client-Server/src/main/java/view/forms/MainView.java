@@ -2,6 +2,9 @@ package view.forms;
 
 import java.awt.EventQueue;
 import javax.swing.text.*;
+
+
+
 import java.awt.Toolkit;
 
 import javax.swing.ButtonGroup;
@@ -36,6 +39,7 @@ import javax.swing.border.BevelBorder;
 import javax.swing.JRadioButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.border.TitledBorder;
 
 
 
@@ -57,13 +61,13 @@ public class MainView extends JFrame {
 	public JButton BsettingForm;
 	public JButton BhomeForm;
 	public JButton BproductForm;
-	public JButton BinvoiceForm;
+	public JButton BsalesOrder;
 	public JPanel CardPanel;
 	public JPanel DashboardPanel;
 	public JPanel ProductPanel;
 	public JPanel SettingPanel;
 	public JPanel HomePanel;
-	public JButton BcheckOut;
+	public JButton Bpayment;
 	public JButton Badd;
 	public JButton Bdelete;
 	public JButton Bupdate;
@@ -77,6 +81,16 @@ public class MainView extends JFrame {
 	public JLabel LBwarning;
 	public JLabel LBnotificate;
 	public JButton Brefresh;
+	public JTextField IPquantity;
+	public JButton Badd_invoice;
+	public JButton Brefresh_invoice;
+	public JLabel LBshowProduct;
+	public JLabel LBshowPrice;
+	public JLabel LBwarning_dashboard;
+	public JLabel LBtotal;
+	public JButton Bremove_invoice;
+	public JLabel LBnameclient;
+	private JPanel SalesOrderPanel;
 	
 
 	
@@ -189,31 +203,31 @@ public class MainView extends JFrame {
 				Toolkit.getDefaultToolkit().createImage(LoginView.class.getResource("/image/product.png"))));
 		MenuPanel.add(BdashboardForm);
 		
-		BinvoiceForm = new JButton("   Invoice");
-		BinvoiceForm.addMouseListener(new MouseAdapter() {
+		BsalesOrder = new JButton("   Sales Order");
+		BsalesOrder.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent e) {
-            	BinvoiceForm.setBackground(new Color(20, 23, 24));  
-            	BinvoiceForm.setForeground(new Color(28,233,255));
+            	BsalesOrder.setBackground(new Color(20, 23, 24));  
+            	BsalesOrder.setForeground(new Color(28,233,255));
             }
 
             @Override
             public void mouseExited(MouseEvent e) {
-            	BinvoiceForm.setBackground(new Color(32, 36, 38));
-            	BinvoiceForm.setForeground(new Color(195, 195, 195));
+            	BsalesOrder.setBackground(new Color(32, 36, 38));
+            	BsalesOrder.setForeground(new Color(195, 195, 195));
             }
         });
-		BinvoiceForm.setFocusable(false);
-		BinvoiceForm.setMargin(new Insets(2, 14, 0, 14));
-		BinvoiceForm.setHorizontalAlignment(SwingConstants.LEADING);
-		BinvoiceForm.setForeground(new Color(195, 195, 195));
-		BinvoiceForm.setFont(new Font("Visby Round CF", Font.PLAIN, 14));
-		BinvoiceForm.setBorderPainted(false);
-		BinvoiceForm.setBackground(new Color(32, 36, 38));
-		BinvoiceForm.setBounds(4, 305, 230, 45);
-		BinvoiceForm.setIcon(new ImageIcon(
+		BsalesOrder.setFocusable(false);
+		BsalesOrder.setMargin(new Insets(2, 14, 0, 14));
+		BsalesOrder.setHorizontalAlignment(SwingConstants.LEADING);
+		BsalesOrder.setForeground(new Color(195, 195, 195));
+		BsalesOrder.setFont(new Font("Visby Round CF", Font.PLAIN, 14));
+		BsalesOrder.setBorderPainted(false);
+		BsalesOrder.setBackground(new Color(32, 36, 38));
+		BsalesOrder.setBounds(4, 305, 230, 45);
+		BsalesOrder.setIcon(new ImageIcon(
 				Toolkit.getDefaultToolkit().createImage(LoginView.class.getResource("/image/invoice.png"))));
-		MenuPanel.add(BinvoiceForm);
+		MenuPanel.add(BsalesOrder);
 		
 		BsettingForm = new JButton("    Setting");
 		BsettingForm.addMouseListener(new MouseAdapter() {
@@ -298,7 +312,7 @@ public class MainView extends JFrame {
 		ListProduct.getVerticalScrollBar().setBackground(new Color(20,23,24));
 		ListProduct.setBorder(new LineBorder(new Color(32, 36, 38), 10, true));
 		ListProduct.setBackground(new Color(20, 23, 24));
-		ListProduct.setBounds(52, 130, 645, 479);
+		ListProduct.setBounds(52, 130, 573, 479);
 		DashboardPanel.add(ListProduct);
 		
 		Table_dasboard = new JTable();
@@ -350,7 +364,7 @@ public class MainView extends JFrame {
 		
 		JPanel invPanel = new JPanel();
 		invPanel.setBackground(new Color(20, 23, 24));
-		invPanel.setBounds(794, 0, 307, 824);
+		invPanel.setBounds(724, 0, 377, 824);
 		DashboardPanel.add(invPanel);
 		invPanel.setLayout(null);
 		
@@ -359,7 +373,7 @@ public class MainView extends JFrame {
 		ListProductToInvoice = new JScrollPane();
 		ListProductToInvoice.setBorder(new LineBorder(new Color(32, 36, 38), 6, true));
 		ListProductToInvoice.setBackground(new Color(28, 32, 34));
-		ListProductToInvoice.setBounds(10,127, 286, 419); //38, 65, 286, 460
+		ListProductToInvoice.setBounds(10,127, 333, 400); 
 		
 		Table_invoice = new JTable();
 		Table_invoice.setFocusable(false);
@@ -400,7 +414,7 @@ public class MainView extends JFrame {
 		JViewport viewport1 = ListProductToInvoice.getViewport();
 		viewport1.setBackground(new Color(20, 23, 24));
 		Table_invoice.setDefaultRenderer(Object.class, new view.renderers.CustomTableCellRenderer());
-		ListProductToInvoice.setBounds(10, 127, 286, 400);
+		ListProductToInvoice.setBounds(10, 127, 360, 400);
 		invPanel.add(ListProductToInvoice);
 		
 		//----------------------------------------------------------------------------------------------------------------//
@@ -410,15 +424,15 @@ public class MainView extends JFrame {
 		LBtotaltext.setForeground(new Color(245, 245, 245));
 		LBtotaltext.setFont(new Font("Visby Round CF", Font.PLAIN, 19));
 		LBtotaltext.setBackground(new Color(238, 240, 240));
-		LBtotaltext.setBounds(19, 563, 76, 28);
+		LBtotaltext.setBounds(52, 563, 76, 28);
 		invPanel.add(LBtotaltext);
 		
-		JLabel LBtotal = new JLabel(". . .");
+		 LBtotal = new JLabel(". . .");
 		LBtotal.setHorizontalAlignment(SwingConstants.RIGHT);
 		LBtotal.setForeground(new Color(245, 245, 245));
 		LBtotal.setFont(new Font("Visby Round CF", Font.PLAIN, 19));
 		LBtotal.setBackground(new Color(238, 240, 240));
-		LBtotal.setBounds(106, 563, 144, 28);
+		LBtotal.setBounds(139, 563, 144, 28);
 		invPanel.add(LBtotal);
 		
 		JLabel lblVnd = new JLabel("vnd");
@@ -426,31 +440,31 @@ public class MainView extends JFrame {
 		lblVnd.setForeground(new Color(245, 245, 245));
 		lblVnd.setFont(new Font("Visby Round CF", Font.PLAIN, 14));
 		lblVnd.setBackground(new Color(238, 240, 240));
-		lblVnd.setBounds(260, 569, 32, 16);
+		lblVnd.setBounds(293, 569, 32, 16);
 		invPanel.add(lblVnd);
 		
-		BcheckOut = new JButton("Checkout");
-		BcheckOut.setAlignmentY(0.0f);
-		BcheckOut.addMouseListener(new MouseAdapter() {
+		Bpayment = new JButton("Payment");
+		Bpayment.setAlignmentY(0.0f);
+		Bpayment.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				BcheckOut.setForeground(new Color(28,233,255));
-				BcheckOut.setBorderPainted(false);
+				Bpayment.setForeground(new Color(28,233,255));
+				Bpayment.setBorderPainted(false);
 			}
 			@Override
 			public void mouseExited(MouseEvent e) {
-				BcheckOut.setForeground(new Color(28, 32, 34));
-				BcheckOut.setBorderPainted(true);
+				Bpayment.setForeground(new Color(28, 32, 34));
+				Bpayment.setBorderPainted(true);
 			}
 		});
-		BcheckOut.setBorder(new MatteBorder(0, 0, 0, 0, (Color) new Color(28, 32, 34)));
-		BcheckOut.setMargin(new Insets(0, 0, 0, 0));
-		BcheckOut.setFocusable(false);
-		BcheckOut.setForeground(new Color(28, 32, 34));
-		BcheckOut.setBackground(new Color(24, 28, 29));
-		BcheckOut.setFont(new Font("Visby Round CF Heavy", Font.BOLD, 21));
-		BcheckOut.setBounds(20, 655, 274, 44);
-		invPanel.add(BcheckOut);
+		Bpayment.setBorder(new MatteBorder(0, 0, 0, 0, (Color) new Color(28, 32, 34)));
+		Bpayment.setMargin(new Insets(0, 0, 0, 0));
+		Bpayment.setFocusable(false);
+		Bpayment.setForeground(new Color(28, 32, 34));
+		Bpayment.setBackground(new Color(20, 23, 24));
+		Bpayment.setFont(new Font("Visby Round CF Heavy", Font.BOLD, 21));
+		Bpayment.setBounds(53, 655, 274, 44);
+		invPanel.add(Bpayment);
 		
 		JLabel LBtotaltext_1 = new JLabel("INVOICE");
 		LBtotaltext_1.setHorizontalAlignment(SwingConstants.LEFT);
@@ -507,7 +521,7 @@ public class MainView extends JFrame {
 		Table_product.setForeground(new Color(255, 255, 255));
 		Table_product.setBackground(new Color(128, 128, 128));
 		Table_product.setSelectionBackground(new Color(40, 40, 40));
-		Table_product.setFont(new Font("Bahnschrift", Font.PLAIN, 16));
+		Table_product.setFont(new Font("Visby Round CF ExtraBold", Font.BOLD, 15));
 		Table_product.setRowHeight(50);
 		Table_product.setModel(
 				new DefaultTableModel(
@@ -701,6 +715,87 @@ public class MainView extends JFrame {
 		LBtotaltext_1_1.setBounds(298, 13, 154, 32);
 		DashboardPanel.add(LBtotaltext_1_1);
 		
+		 LBshowProduct = new JLabel("");
+		LBshowProduct.setBorder(new MatteBorder(0, 0, 2, 0, (Color) new Color(248, 248, 248)));
+		LBshowProduct.setHorizontalAlignment(SwingConstants.CENTER);
+		LBshowProduct.setForeground(new Color(248, 248, 248));
+		LBshowProduct.setFont(new Font("Visby Round CF", Font.PLAIN, 14));
+		LBshowProduct.setBounds(115, 649, 140, 32);
+		DashboardPanel.add(LBshowProduct);
+		
+		 LBshowPrice = new JLabel("");
+		LBshowPrice.setHorizontalAlignment(SwingConstants.CENTER);
+		LBshowPrice.setForeground(new Color(248, 248, 248));
+		LBshowPrice.setFont(new Font("Visby Round CF", Font.PLAIN, 14));
+		LBshowPrice.setBorder(new MatteBorder(0, 0, 2, 0, (Color) new Color(248, 248, 248)));
+		LBshowPrice.setBounds(274, 649, 116, 32);
+		DashboardPanel.add(LBshowPrice);
+		
+		IPquantity = new JTextField();
+		IPquantity.setHorizontalAlignment(SwingConstants.CENTER);
+		IPquantity.setForeground(new Color(245, 245, 245));
+		IPquantity.setFont(new Font("Visby Round CF DemiBold", Font.BOLD, 15));
+		IPquantity.setColumns(10);
+		IPquantity.setCaretColor(Color.WHITE);
+		IPquantity.setBorder(new MatteBorder(0, 0, 2, 0, (Color) new Color(240, 240, 240)));
+		IPquantity.setBackground(new Color(20, 23, 24));
+		IPquantity.setBounds(573, 656, 59, 23);
+		DashboardPanel.add(IPquantity);
+		
+		JLabel lblNewLabel = new JLabel("Enter a quantity :");
+		lblNewLabel.setForeground(new Color(248, 248, 248));
+		lblNewLabel.setFont(new Font("Visby Round CF", Font.PLAIN, 14));
+		lblNewLabel.setBounds(443, 645, 128, 36);
+		DashboardPanel.add(lblNewLabel);
+		
+		Badd_invoice = new JButton("");
+		Badd_invoice.setBorderPainted(false);
+		Badd_invoice.setIcon(new ImageIcon(
+				Toolkit.getDefaultToolkit().createImage(MainView.class.getResource("/image/plus.png"))));
+		
+		Badd_invoice.setMargin(new Insets(8, 14, 2, 14));
+		Badd_invoice.setForeground(new Color(20, 23, 24));
+		Badd_invoice.setFont(new Font("Visby Round CF Heavy", Font.BOLD, 14));
+		Badd_invoice.setFocusable(false);
+		Badd_invoice.setBackground(new Color(20, 23, 24));
+		Badd_invoice.setBounds(651, 201, 71, 67);
+		DashboardPanel.add(Badd_invoice);
+		
+		Brefresh_invoice = new JButton("");
+		
+		Brefresh_invoice.setBorderPainted(false);
+		Brefresh_invoice.setIcon(new ImageIcon(
+				Toolkit.getDefaultToolkit().createImage(MainView.class.getResource("/image/refresh.png"))));
+		
+		Brefresh_invoice.setMargin(new Insets(8, 14, 2, 14));
+		Brefresh_invoice.setForeground(new Color(20, 23, 24));
+		Brefresh_invoice.setFont(new Font("Visby Round CF Heavy", Font.BOLD, 14));
+		Brefresh_invoice.setFocusable(false);
+		Brefresh_invoice.setBackground(new Color(20, 23, 24));
+		Brefresh_invoice.setBounds(652, 284, 67, 66);
+		DashboardPanel.add(Brefresh_invoice);
+		
+		 LBwarning_dashboard = new JLabel("");
+		LBwarning_dashboard.setHorizontalAlignment(SwingConstants.CENTER);
+		LBwarning_dashboard.setForeground(new Color(220, 14, 19));
+		LBwarning_dashboard.setFont(new Font("Bahnschrift", Font.PLAIN, 14));
+		LBwarning_dashboard.setBackground(new Color(236, 15, 20));
+		LBwarning_dashboard.setBounds(158, 615, 344, 30);
+		DashboardPanel.add(LBwarning_dashboard);
+		
+		 Bremove_invoice = new JButton("");
+		 Bremove_invoice.setBorderPainted(false);
+		 Bremove_invoice.setIcon(new ImageIcon(
+					Toolkit.getDefaultToolkit().createImage(MainView.class.getResource("/image/delete.png"))));
+		
+		Bremove_invoice.setMargin(new Insets(8, 14, 2, 14));
+		Bremove_invoice.setForeground(new Color(20, 23, 24));
+		Bremove_invoice.setFont(new Font("Visby Round CF Heavy", Font.BOLD, 14));
+		Bremove_invoice.setFocusable(false);
+		Bremove_invoice.setBackground(new Color(20, 23, 24));
+		Bremove_invoice.setBounds(653, 366, 67, 63);
+		DashboardPanel.add(Bremove_invoice);
+		
 		group_status = new ButtonGroup();
 		group_status.add(RBavailable);
 		group_status.add(RBnotAvailable);
@@ -882,7 +977,7 @@ public class MainView extends JFrame {
 		LBlogoclient.setIcon(new ImageIcon(
 				Toolkit.getDefaultToolkit().createImage(LoginView.class.getResource("/image/unknown.png"))));
 		
-		JLabel LBnameclient = new JLabel("Hello , admin");
+		LBnameclient = new JLabel("Hello , ");
 		LBnameclient.setBounds(398, 34, 300, 58);
 		HomePanel.add(LBnameclient);
 		LBnameclient.addMouseListener(new MouseAdapter() {
@@ -901,6 +996,19 @@ public class MainView extends JFrame {
 		LBnameclient.setBackground(new Color(238, 240, 240));
 		LBnameclient.setForeground(new Color(245, 245, 245));
 		LBnameclient.setFont(new Font("Visby Round CF ExtraBold", Font.BOLD, 33));
+		
+		SalesOrderPanel = new JPanel();
+		SalesOrderPanel.setBackground(new Color(20, 23, 24));
+		CardPanel.add(SalesOrderPanel, "name_1678656511700");
+		SalesOrderPanel.setLayout(null);
+		
+		JLabel LBtotaltext_1_1_3 = new JLabel("SALES ORDER");
+		LBtotaltext_1_1_3.setHorizontalAlignment(SwingConstants.LEFT);
+		LBtotaltext_1_1_3.setForeground(new Color(56, 185, 199));
+		LBtotaltext_1_1_3.setFont(new Font("Visby Round CF ExtraBold", Font.PLAIN, 25));
+		LBtotaltext_1_1_3.setBackground(new Color(245, 195, 34));
+		LBtotaltext_1_1_3.setBounds(462, 11, 169, 32);
+		SalesOrderPanel.add(LBtotaltext_1_1_3);
 	}
 	//----------------------------------------------------------------------------------------------------------------//
 	public void addActionListener(ActionListener listener) {
@@ -910,7 +1018,7 @@ public class MainView extends JFrame {
         BdashboardForm.addActionListener(listener);
         BproductForm.addActionListener(listener);
         BsettingForm.addActionListener(listener);
-        BinvoiceForm.addActionListener(listener);
+        BsalesOrder.addActionListener(listener);
         Bsignout.addActionListener(listener);
         
       //-----------Manage Product -------------------------//
@@ -920,7 +1028,7 @@ public class MainView extends JFrame {
         Bupdate.addActionListener(listener);
         
       //---------------------------------------------------//
-        BcheckOut.addActionListener(listener);
+        Bpayment.addActionListener(listener);
         
         
     }

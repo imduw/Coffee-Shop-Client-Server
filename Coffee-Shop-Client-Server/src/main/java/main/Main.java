@@ -10,10 +10,12 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 
+import DAO.AccountDAO;
+import DAO.ProductDAO;
+import controller.AccountController;
 import controller.AdminController;
 import controller.ProductController;
 import controller.TableController;
-import dao.ProductDAO;
 import model.ProductModel;
 import util.HibernateAPI;
 import view.forms.LoginView;
@@ -33,7 +35,9 @@ public class Main {
 					MainView mainView = new MainView();
 					ProductController productController = new ProductController(productDAO, mainView, loginview, productModel);					
 					TableController tableController = new TableController(productController,mainView,productDAO);
-				    AdminController adminController = new AdminController(mainView,loginview, productModel);
+				    AdminController adminController = new AdminController(mainView,loginview,productModel);
+				    AccountDAO accountDAO = new AccountDAO();
+				    AccountController accountController =new AccountController(accountDAO, mainView, loginview);
 					loginview.setVisible(true);
 
 				    
