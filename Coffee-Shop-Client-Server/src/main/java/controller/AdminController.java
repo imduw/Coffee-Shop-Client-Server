@@ -54,15 +54,22 @@ public class AdminController implements ActionListener {
 				mv.CardPanel.repaint();
 				mv.CardPanel.revalidate();
 			});
-			mv.BsettingForm.addActionListener((e)->{
-				mv.CardPanel.removeAll();
-				mv.CardPanel.add(mv.SettingPanel);
-				mv.CardPanel.repaint();
-				mv.CardPanel.revalidate();
-			});
+//			mv.BsettingForm.addActionListener((e)->{
+//				mv.CardPanel.removeAll();
+//				mv.CardPanel.add(mv.SettingPanel);
+//				mv.CardPanel.repaint();
+//				mv.CardPanel.revalidate();
+//			});
 			mv.BhomeForm.addActionListener((e)->{
 				mv.CardPanel.removeAll();
 				mv.CardPanel.add(mv.HomePanel);
+				mv.CardPanel.repaint();
+				mv.CardPanel.revalidate();
+			});
+			
+			mv.BsalesOrder.addActionListener((e)->{
+				mv.CardPanel.removeAll();
+				mv.CardPanel.add(mv.SalesOrderPanel);
 				mv.CardPanel.repaint();
 				mv.CardPanel.revalidate();
 			});

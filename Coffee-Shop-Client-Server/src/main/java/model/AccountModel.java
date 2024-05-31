@@ -24,10 +24,10 @@ public class AccountModel {
 
 	public AccountModel(Integer iD, String username, String password, String role) {
 		
-		ID = iD;
-		Username = username;
-		Password = password;
-		Role = role;
+		this.ID = iD;
+		this.Username = username;
+		this.Password = password;
+		this.Role = role;
 	}
 
 
@@ -74,6 +74,9 @@ public class AccountModel {
 	public void setRole(String role) {
 		Role = role;
 	}
+
+
+	
 
 	
 	

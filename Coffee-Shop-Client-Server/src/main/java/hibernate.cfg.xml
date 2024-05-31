@@ -31,6 +31,7 @@
         
         <!-- Mapping files -->
         <mapping class="model.ProductModel"/>
+        <mapping class="model.OrderModel"/>
         <mapping class="model.AccountModel"/>
     </session-factory>
 </hibernate-configuration>

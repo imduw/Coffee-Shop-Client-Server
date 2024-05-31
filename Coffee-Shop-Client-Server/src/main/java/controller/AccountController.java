@@ -68,6 +68,7 @@ public class AccountController {
 				lv.setVisible(false);
 				mv.setVisible(true);
 				mv.LBnameclient.setText("Hello "+lv.IPusername.getText()+" !");
+				mv.LBnameclient_1.setText(lv.IPusername.getText());
 			}else {
 				lv.IPusername.setText("");
 				lv.IPpassword.setText("");

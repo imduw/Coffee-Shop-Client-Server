@@ -6,9 +6,11 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
+import DAO.OrderDAO;
 import DAO.ProductDAO;
 import controller.ProductController;
 import model.ProductModel;
+import model.OrderModel;
 import view.forms.MainView;
 
 import java.awt.event.MouseAdapter;
@@ -17,15 +19,19 @@ import java.util.List;
 
 public class TableController {
     private ProductController productController;
+    private OrderController orderController;
     private MainView mv;
     private ProductDAO productDAO;
+    private OrderDAO orderDAO;
     //private JTable table;
     
 
-    public TableController(ProductController productController,MainView mv,ProductDAO productDAO) {
+    public TableController(ProductController productController,OrderController orderController,MainView mv,ProductDAO productDAO,OrderDAO orderDAO) {
         this.productController = productController;       
+        this.orderController = orderController;
         this.mv = mv;
         this.productDAO = productDAO;
+        this.orderDAO = orderDAO;
         
         mv.BdashboardForm.addActionListener((e)->{
         	dashboardProductTable();
@@ -46,6 +52,9 @@ public class TableController {
         	
         });
         
+//        mv.BsalesOrder.addActionListener((e)->{
+//        	refreshOrderTable(mv.Table_order);
+//        });
         
         
         
@@ -63,28 +72,7 @@ public class TableController {
  
         
         mv.Badd_invoice.addActionListener((e)->{
-        	try {
-				if (!mv.IPquantity.getText().isEmpty() 
-						&& Integer.valueOf(mv.IPquantity.getText()) > 0
-						&& !mv.LBshowPrice.getText().isEmpty()
-						&& !mv.LBshowProduct.getText().isEmpty()) {
-					int Total = Integer.valueOf(mv.LBshowPrice.getText()) * Integer.valueOf(mv.IPquantity.getText());
-					DefaultTableModel model = (DefaultTableModel) mv.Table_invoice.getModel();
-
-					model.addRow(new Object[] { mv.LBshowProduct.getText(), mv.IPquantity.getText(), Total });
-					mv.LBwarning_dashboard.setText("");
-					resetBill();
-				} else {
-					if (mv.LBshowProduct.getText().isEmpty()) {
-						mv.LBwarning_dashboard.setText("Please select product");
-					} else {
-						mv.LBwarning_dashboard.setText("Please enter quantity");
-					}
-				}
-			} catch (NumberFormatException e1) {
-				JOptionPane.showMessageDialog(null, "Connect failed !");
-				e1.printStackTrace();
-			}
+        	addInvoice();
         });
         mv.Brefresh_invoice.addActionListener((e)->{
         	DefaultTableModel model = (DefaultTableModel) mv.Table_invoice.getModel();
@@ -155,7 +143,30 @@ public class TableController {
     
 //--------------------------------------------------------------------------------------------------------//
     
-    
+    public void addInvoice() {
+    	try {
+			if (!mv.IPquantity.getText().isEmpty() 
+					&& Integer.valueOf(mv.IPquantity.getText()) > 0
+					&& !mv.LBshowPrice.getText().isEmpty()
+					&& !mv.LBshowProduct.getText().isEmpty()) {
+				int Total = Integer.valueOf(mv.LBshowPrice.getText()) * Integer.valueOf(mv.IPquantity.getText());
+				DefaultTableModel model = (DefaultTableModel) mv.Table_invoice.getModel();
+
+				model.addRow(new Object[] { mv.LBshowProduct.getText(), mv.IPquantity.getText(), Total });
+				mv.LBwarning_dashboard.setText("");
+				resetBill();
+			} else {
+				if (mv.LBshowProduct.getText().isEmpty()) {
+					mv.LBwarning_dashboard.setText("Please select product");
+				} else {
+					mv.LBwarning_dashboard.setText("Please enter quantity");
+				}
+			}
+		} catch (NumberFormatException e1) {
+			JOptionPane.showMessageDialog(null, "Connect failed !");
+			e1.printStackTrace();
+		}
+    }
     public void dashboardProductTable() {
     	
         List<ProductModel> productList = productController.getAllProducts();       
@@ -200,6 +211,24 @@ public class TableController {
         }    
         table.setModel(model);                     
     }
+    
+    public void refreshOrderTable(JTable table) {
+    	
+        List<OrderModel> orderlist = orderController.getAllOrders();  
+        DefaultTableModel model = (DefaultTableModel) table.getModel();        
+        model.setRowCount(0);
+
+        for (OrderModel order : orderlist) {
+
+            model.addRow(new Object[]{order.getID(),
+            						  order.getCreator(),
+            						  order.getTotal(),
+        							  order.getDate()
+        							  });
+        }    
+        table.setModel(model);                     
+    }
+    
     public void searchProduct_Dashboard(JTable table, List<ProductModel> productList) {
         DefaultTableModel model = (DefaultTableModel) table.getModel();
         model.setRowCount(0);

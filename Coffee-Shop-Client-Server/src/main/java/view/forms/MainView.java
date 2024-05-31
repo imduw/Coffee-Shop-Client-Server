@@ -58,7 +58,6 @@ public class MainView extends JFrame {
 	public JTextField IPproduct;
 	public JTextField IPprice;
 	public JButton BdashboardForm;
-	public JButton BsettingForm;
 	public JButton BhomeForm;
 	public JButton BproductForm;
 	public JButton BsalesOrder;
@@ -90,7 +89,10 @@ public class MainView extends JFrame {
 	public JLabel LBtotal;
 	public JButton Bremove_invoice;
 	public JLabel LBnameclient;
-	private JPanel SalesOrderPanel;
+	public JPanel SalesOrderPanel;
+	public JScrollPane ListTable_order;
+	public JTable Table_order;
+	public JLabel LBnameclient_1;
 	
 
 	
@@ -228,32 +230,6 @@ public class MainView extends JFrame {
 		BsalesOrder.setIcon(new ImageIcon(
 				Toolkit.getDefaultToolkit().createImage(LoginView.class.getResource("/image/invoice.png"))));
 		MenuPanel.add(BsalesOrder);
-		
-		BsettingForm = new JButton("    Setting");
-		BsettingForm.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseEntered(MouseEvent e) {
-            	BsettingForm.setBackground(new Color(20, 23, 24)); 
-            	BsettingForm.setForeground(new Color(28,233,255));
-            }
-
-            @Override
-            public void mouseExited(MouseEvent e) {
-            	BsettingForm.setBackground(new Color(32, 36, 38));
-            	BsettingForm.setForeground(new Color(195, 195, 195));
-            }
-        });
-		BsettingForm.setFocusable(false);
-		BsettingForm.setMargin(new Insets(2, 14, 0, 14));
-		BsettingForm.setHorizontalAlignment(SwingConstants.LEADING);
-		BsettingForm.setForeground(new Color(195, 195, 195));
-		BsettingForm.setFont(new Font("Visby Round CF", Font.PLAIN, 14));
-		BsettingForm.setBorderPainted(false);
-		BsettingForm.setBackground(new Color(32, 36, 38));
-		BsettingForm.setBounds(6, 361, 228, 45);
-		BsettingForm.setIcon(new ImageIcon(
-				Toolkit.getDefaultToolkit().createImage(LoginView.class.getResource("/image/setting.png"))));
-		MenuPanel.add(BsettingForm);
 		
 		BproductForm = new JButton("  Product");
 		BproductForm.addMouseListener(new MouseAdapter() {
@@ -506,8 +482,7 @@ public class MainView extends JFrame {
 		CardPanel.add(ProductPanel, "name_18041534092000");
 		ProductPanel.setLayout(null);
 		//------------------------------------Table ở ProductPanel------------------------------------------------------------------------------------------//
-		ListTable_product = new JScrollPane();
-		//ListTable_product.getVerticalScrollBar().setBackground(new Color(20,23,24));
+		ListTable_product = new JScrollPane();		
 		ListTable_product.setBorder(new LineBorder(new Color(32, 36, 38), 10, true));
 		ListTable_product.setBackground(new Color(20, 23, 24));
 		ListTable_product.setBounds(55, 130, 682, 606);
@@ -997,6 +972,14 @@ public class MainView extends JFrame {
 		LBnameclient.setForeground(new Color(245, 245, 245));
 		LBnameclient.setFont(new Font("Visby Round CF ExtraBold", Font.BOLD, 33));
 		
+		LBnameclient_1 = new JLabel("admin");
+		LBnameclient_1.setHorizontalAlignment(SwingConstants.RIGHT);
+		LBnameclient_1.setForeground(new Color(245, 245, 245));
+		LBnameclient_1.setFont(new Font("Visby Round CF ExtraBold", Font.BOLD, 13));
+		LBnameclient_1.setBackground(new Color(238, 240, 240));
+		LBnameclient_1.setBounds(918, 24, 118, 22);
+		HomePanel.add(LBnameclient_1);
+		
 		SalesOrderPanel = new JPanel();
 		SalesOrderPanel.setBackground(new Color(20, 23, 24));
 		CardPanel.add(SalesOrderPanel, "name_1678656511700");
@@ -1007,8 +990,63 @@ public class MainView extends JFrame {
 		LBtotaltext_1_1_3.setForeground(new Color(56, 185, 199));
 		LBtotaltext_1_1_3.setFont(new Font("Visby Round CF ExtraBold", Font.PLAIN, 25));
 		LBtotaltext_1_1_3.setBackground(new Color(245, 195, 34));
-		LBtotaltext_1_1_3.setBounds(462, 11, 169, 32);
+		LBtotaltext_1_1_3.setBounds(316, 42, 169, 32);
 		SalesOrderPanel.add(LBtotaltext_1_1_3);
+		
+		//---------------------------------------------------------------------------------------------//
+		
+		ListTable_order = new JScrollPane();		
+		ListTable_order.setBorder(new LineBorder(new Color(32, 36, 38), 10, true));
+		ListTable_order.setBackground(new Color(20, 23, 24));
+		ListTable_order.setBounds(55, 130, 700, 606);
+		SalesOrderPanel.add(ListTable_order);
+		
+		Table_order = new JTable();
+		Table_order.setFocusable(false);
+		Table_order.setRowMargin(0);
+		Table_order.setGridColor(new Color(128, 128, 128));
+		Table_order.setSelectionForeground(new Color(50, 210, 210));
+		Table_order.setForeground(new Color(255, 255, 255));
+		Table_order.setBackground(new Color(128, 128, 128));
+		Table_order.setSelectionBackground(new Color(40, 40, 40));
+		Table_order.setFont(new Font("Visby Round CF ExtraBold", Font.BOLD, 15));
+		Table_order.setRowHeight(50);
+		Table_order.setModel(
+				new DefaultTableModel(
+			new Object[][] {
+			},
+			new String[] {
+				"ID", "Creator", "Total", "Time"
+			}
+		) {
+			boolean[] columnEditables = new boolean[] {
+				false, false, false, false
+			};
+			public boolean isCellEditable(int row, int column) {
+				return columnEditables[column];
+			}
+		});
+		Table_order.getColumnModel().getColumn(0).setResizable(false);
+		Table_order.getColumnModel().getColumn(0).setPreferredWidth(32);
+		Table_order.getColumnModel().getColumn(1).setResizable(false);
+		Table_order.getColumnModel().getColumn(2).setResizable(false);
+		Table_order.getColumnModel().getColumn(2).setPreferredWidth(55);
+		Table_order.getColumnModel().getColumn(3).setResizable(false);
+		Table_order.getColumnModel().getColumn(3).setPreferredWidth(59);
+		ListTable_order.setViewportView(Table_order);
+		
+		JTableHeader header_order_1 = Table_order.getTableHeader();		
+		header_order_1.setResizingAllowed(false);		
+		header_order_1.setReorderingAllowed(false);
+		header_order_1.setDefaultRenderer(new view.renderers.CustomTableHeaderRenderer());
+		JViewport viewport_order = ListTable_order.getViewport();
+		viewport_order.setBackground(new Color(20, 23, 24));
+		Table_order.setDefaultRenderer(Object.class, new view.renderers.CustomTableCellRenderer());
+		CardPanel.add(DashboardPanel);
+		
+		
+		BsalesOrder.setVisible(false);
+		Bpayment.setVisible(false);
 	}
 	//----------------------------------------------------------------------------------------------------------------//
 	public void addActionListener(ActionListener listener) {
@@ -1017,7 +1055,7 @@ public class MainView extends JFrame {
 		
         BdashboardForm.addActionListener(listener);
         BproductForm.addActionListener(listener);
-        BsettingForm.addActionListener(listener);
+//        BsettingForm.addActionListener(listener);
         BsalesOrder.addActionListener(listener);
         Bsignout.addActionListener(listener);
         
