@@ -51,98 +51,130 @@ public class ProductController  {
 //----------------------------------------------------------------------------------------------------------------------------------//
 	
 	
-    public void addProduct() {
-    	
-    		ProductModel product = new ProductModel();
-    		
-    		if(mv.IPproduct.getText().isEmpty()) {
-				mv.LBwarning.setText("Please enter product name");			
-			}
-    		else if(mv.IPprice.getText().isEmpty()) {
-				mv.LBwarning.setText("Please enter product price");	
-			}
-    		else if(!mv.RBdrink.isSelected() & !mv.RBfood.isSelected()){
-				mv.LBwarning.setText("Please select product category");																						        
-			}
-    		else if(!mv.RBavailable.isSelected() & !mv.RBnotAvailable.isSelected()){
-				mv.LBwarning.setText("Please select product status");																						        
-			}
-    		else {
-			        if(mv.RBdrink.isSelected()) {
-						product.setProductCategory(true);
-					}else if(mv.RBfood.isSelected()) {
-						product.setProductCategory(false);
-					}
-					if(mv.RBavailable.isSelected()) {
-						product.setProductStatus(true);
-					}else if(mv.RBnotAvailable.isSelected()) {
-						product.setProductStatus(false);
-					}					
-			        product.setProductName(mv.IPproduct.getText());		            
-		            product.setProductPrice(Integer.parseInt(mv.IPprice.getText()));
-		            
-		            
-		            productDAO.addProduct(product);
-		            mv.LBnotificate.setText("You have added "+mv.IPproduct.getText()+" to the list");
-			}
-      	
+	public void addProduct() {
+	    String productName = mv.IPproduct.getText();
+	    String priceText = mv.IPprice.getText();
 
-    }
-    
-    
-    public void updateProduct() {
-    	int productId = productDAO.getProductIDByName(mv.IPproduct.getText());
-    	ProductModel product = productDAO.getProductById(productId);
-    	
-    	if(mv.IPproduct.getText().isEmpty()) {
-			mv.LBwarning.setText("Please enter product name");			
-		}
-		else if(mv.IPprice.getText().isEmpty()) {
-			mv.LBwarning.setText("Please enter product price");	
-		}
-		else if(mv.group_category.getSelection()==null){
-			mv.LBwarning.setText("Please select product category");				
-		}
-		else if(mv.group_status.getSelection()==null){
-			mv.LBwarning.setText("Please select product status");																						        
-		}
-		else {
-		        if(mv.RBdrink.isSelected()) {
-					product.setProductCategory(true);
-				}else if(mv.RBfood.isSelected()) {
-					product.setProductCategory(false);
-				}
-				if(mv.RBavailable.isSelected()) {
-					product.setProductStatus(true);
-				}else if(mv.RBnotAvailable.isSelected()) {
-					product.setProductStatus(false);
-				}
-				
-		        product.setProductName(mv.IPproduct.getText());		            
-	            product.setProductPrice(Integer.parseInt(mv.IPprice.getText()));	
-	            
-	            productDAO.updateProduct(product);
-	            mv.LBnotificate.setText("You just updated "+mv.IPproduct.getText()+",please click REFESH");
-		}
-    									
-		
+	    if (productName.isEmpty()) {
+	        mv.LBwarning.setText("Please enter product name");
+	        return;
+	    }
+
+	    if (priceText.isEmpty()) {
+	        mv.LBwarning.setText("Please enter product price");
+	        return;
+	    }
+
+	    int price;
+	    try {
+	        price = Integer.parseInt(priceText);
+	        if (price <= 0) {
+	            mv.LBwarning.setText("Product price must be greater than 0");
+	            return;
+	        }
+	    } catch (NumberFormatException e) {
+	        mv.LBwarning.setText("Invalid product price");
+	        return;
+	    }
+
+	    if (!mv.RBdrink.isSelected() && !mv.RBfood.isSelected()) {
+	        mv.LBwarning.setText("Please select product category");
+	        return;
+	    }
+
+	    if (!mv.RBavailable.isSelected() && !mv.RBnotAvailable.isSelected()) {
+	        mv.LBwarning.setText("Please select product status");
+	        return;
+	    }
+
+	    boolean isDrink = mv.RBdrink.isSelected();
+	    boolean isAvailable = mv.RBavailable.isSelected();
+
+	    ProductModel product = new ProductModel();
+	    product.setProductName(productName);
+	    product.setProductPrice(price);
+	    product.setProductCategory(isDrink);
+	    product.setProductStatus(isAvailable);
+
+	    productDAO.addProduct(product);
+	    mv.LBnotificate.setText("You have added " + productName + " to the list");
 	}
 
-    public void deleteProduct() {
-    	if(mv.IPproduct.getText().isEmpty()) {
-			mv.LBwarning.setText("Please select the product again");
-    	}else {
-    		try {
-				int productId = productDAO.getProductIDByName(mv.IPproduct.getText());
-				ProductModel product = productDAO.getProductById(productId);
-				productDAO.deleteProduct(product);
-			} catch (Exception e) {
-				mv.LBwarning.setText("Shop does not have this product");
-				e.printStackTrace();
-			}
-    	}
-    	
-    }
+    
+    
+	public void updateProduct() {
+	    String productName = mv.IPproduct.getText();
+	    String priceText = mv.IPprice.getText();
+
+	    if (productName.isEmpty()) {
+	        mv.LBwarning.setText("Please enter product name");
+	        return;
+	    }
+
+	    if (priceText.isEmpty()) {
+	        mv.LBwarning.setText("Please enter product price");
+	        return;
+	    }
+
+	    if (mv.group_category.getSelection() == null) {
+	        mv.LBwarning.setText("Please select product category");
+	        return;
+	    }
+
+	    if (mv.group_status.getSelection() == null) {
+	        mv.LBwarning.setText("Please select product status");
+	        return;
+	    }
+
+	    Integer productIdInteger = productDAO.getProductIDByName(productName);
+	    if (productIdInteger == null) {
+	        mv.LBwarning.setText("Product does not exist");
+	        return;
+	    }
+
+	    int productId = productIdInteger.intValue(); // Chuyển Integer thành int
+	    boolean isDrink = mv.RBdrink.isSelected();
+	    boolean isAvailable = mv.RBavailable.isSelected();
+
+	    ProductModel product = new ProductModel();
+	    product.setProductID(productId);
+	    product.setProductName(productName);
+	    product.setProductPrice(Integer.parseInt(priceText));
+	    product.setProductCategory(isDrink);
+	    product.setProductStatus(isAvailable);
+
+	    productDAO.updateProduct(product);
+	    mv.LBnotificate.setText("You just updated " + productName + ", please click REFRESH");
+	}
+
+
+
+	public void deleteProduct() {
+	    String productName = mv.IPproduct.getText();
+
+	    if (productName.isEmpty()) {
+	        mv.LBwarning.setText("Please select the product again");
+	        return;
+	    }
+
+	    Integer productIdInteger = productDAO.getProductIDByName(productName);
+
+	    if (productIdInteger == null || productIdInteger == -1) {
+	        mv.LBwarning.setText("Product does not exist");
+	        return;
+	    }
+
+	    int productId = productIdInteger.intValue(); // Chuyển Integer thành int
+
+	    try {
+	        ProductModel product = productDAO.getProductById(productId);
+	        productDAO.deleteProduct(product);
+	    } catch (Exception e) {
+	        mv.LBwarning.setText("An error occurred while deleting the product");
+	        e.printStackTrace();
+	    }
+	}
+
 
     public ProductModel getProductById(Integer productId) {
         return productDAO.getProductById(productId);

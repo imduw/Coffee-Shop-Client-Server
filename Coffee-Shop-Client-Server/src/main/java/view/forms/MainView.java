@@ -88,11 +88,23 @@ public class MainView extends JFrame {
 	public JLabel LBwarning_dashboard;
 	public JLabel LBtotal;
 	public JButton Bremove_invoice;
-	public JLabel LBnameclient;
 	public JPanel SalesOrderPanel;
 	public JScrollPane ListTable_order;
 	public JTable Table_order;
-	public JLabel LBnameclient_1;
+	public JLabel LBnameuser;
+	public JTextField IPreceive;
+	public JLabel LBrefund;
+	public JTextField IPsearch_order;
+	public JTextField IPday;
+	public JLabel LBmonth;
+	public JTextField IPmonth;
+	public JLabel LByear;
+	public JTextField IPyear;
+	public JLabel LBnotificate_order;
+	public JButton Bsearch_order;
+	public JButton BrefreshOrder;
+	private JLabel LBbanner_home;
+	public JLabel LBwarning_invoice;
 	
 
 	
@@ -200,7 +212,7 @@ public class MainView extends JFrame {
 		BdashboardForm.setFont(new Font("Visby Round CF", Font.PLAIN, 14));
 		BdashboardForm.setBorderPainted(false);
 		BdashboardForm.setBackground(new Color(32, 36, 38));
-		BdashboardForm.setBounds(7, 190, 226, 45);
+		BdashboardForm.setBounds(7, 190, 227, 45);
 		BdashboardForm.setIcon(new ImageIcon(
 				Toolkit.getDefaultToolkit().createImage(LoginView.class.getResource("/image/product.png"))));
 		MenuPanel.add(BdashboardForm);
@@ -252,7 +264,7 @@ public class MainView extends JFrame {
 		BproductForm.setFocusable(false);
 		BproductForm.setBorderPainted(false);
 		BproductForm.setBackground(new Color(32, 36, 38));
-		BproductForm.setBounds(3, 246, 229, 45);
+		BproductForm.setBounds(3, 246, 230, 45);
 		BproductForm.setIcon(new ImageIcon(
 				Toolkit.getDefaultToolkit().createImage(LoginView.class.getResource("/image/product-management.png"))));
 		MenuPanel.add(BproductForm);
@@ -398,15 +410,15 @@ public class MainView extends JFrame {
 		JLabel LBtotaltext = new JLabel("Total :");
 		LBtotaltext.setHorizontalAlignment(SwingConstants.LEFT);
 		LBtotaltext.setForeground(new Color(245, 245, 245));
-		LBtotaltext.setFont(new Font("Visby Round CF", Font.PLAIN, 19));
+		LBtotaltext.setFont(new Font("Visby Round CF", Font.PLAIN, 17));
 		LBtotaltext.setBackground(new Color(238, 240, 240));
-		LBtotaltext.setBounds(52, 563, 76, 28);
+		LBtotaltext.setBounds(51, 561, 76, 28);
 		invPanel.add(LBtotaltext);
 		
-		 LBtotal = new JLabel(". . .");
+		 LBtotal = new JLabel("");
 		LBtotal.setHorizontalAlignment(SwingConstants.RIGHT);
 		LBtotal.setForeground(new Color(245, 245, 245));
-		LBtotal.setFont(new Font("Visby Round CF", Font.PLAIN, 19));
+		LBtotal.setFont(new Font("Visby Round CF", Font.PLAIN, 17));
 		LBtotal.setBackground(new Color(238, 240, 240));
 		LBtotal.setBounds(139, 563, 144, 28);
 		invPanel.add(LBtotal);
@@ -439,7 +451,7 @@ public class MainView extends JFrame {
 		Bpayment.setForeground(new Color(28, 32, 34));
 		Bpayment.setBackground(new Color(20, 23, 24));
 		Bpayment.setFont(new Font("Visby Round CF Heavy", Font.BOLD, 21));
-		Bpayment.setBounds(53, 655, 274, 44);
+		Bpayment.setBounds(53, 690, 274, 44);
 		invPanel.add(Bpayment);
 		
 		JLabel LBtotaltext_1 = new JLabel("INVOICE");
@@ -447,8 +459,67 @@ public class MainView extends JFrame {
 		LBtotaltext_1.setForeground(new Color(56, 185, 199));
 		LBtotaltext_1.setFont(new Font("Visby Round CF ExtraBold", Font.PLAIN, 25));
 		LBtotaltext_1.setBackground(new Color(238, 240, 240));
-		LBtotaltext_1.setBounds(108, 22, 110, 32);
+		LBtotaltext_1.setBounds(145, 27, 110, 32);
 		invPanel.add(LBtotaltext_1);
+		
+		JLabel LBtotaltext_2 = new JLabel("Receive :");
+		LBtotaltext_2.setHorizontalAlignment(SwingConstants.LEFT);
+		LBtotaltext_2.setForeground(new Color(245, 245, 245));
+		LBtotaltext_2.setFont(new Font("Visby Round CF", Font.PLAIN, 17));
+		LBtotaltext_2.setBackground(new Color(238, 240, 240));
+		LBtotaltext_2.setBounds(27, 631, 81, 28);
+		invPanel.add(LBtotaltext_2);
+		
+		JLabel lblVnd_1 = new JLabel("vnd");
+		lblVnd_1.setHorizontalAlignment(SwingConstants.LEFT);
+		lblVnd_1.setForeground(new Color(245, 245, 245));
+		lblVnd_1.setFont(new Font("Visby Round CF", Font.PLAIN, 14));
+		lblVnd_1.setBackground(new Color(238, 240, 240));
+		lblVnd_1.setBounds(291, 635, 32, 16);
+		invPanel.add(lblVnd_1);
+		
+		IPreceive = new JTextField();
+		IPreceive.setHorizontalAlignment(SwingConstants.RIGHT);
+		IPreceive.setForeground(new Color(245, 245, 245));
+		IPreceive.setFont(new Font("Visby Round CF", Font.PLAIN, 17));
+		IPreceive.setColumns(10);
+		IPreceive.setCaretColor(Color.WHITE);
+		IPreceive.setBorder(new MatteBorder(0, 0, 2, 0, (Color) new Color(240, 240, 240)));
+		IPreceive.setBackground(new Color(20, 23, 24));
+		IPreceive.setBounds(113, 635, 172, 23);
+		invPanel.add(IPreceive);
+		
+		JLabel LBtotaltext_2_1 = new JLabel("Refund :");
+		LBtotaltext_2_1.setHorizontalAlignment(SwingConstants.LEFT);
+		LBtotaltext_2_1.setForeground(new Color(245, 245, 245));
+		LBtotaltext_2_1.setFont(new Font("Visby Round CF", Font.PLAIN, 17));
+		LBtotaltext_2_1.setBackground(new Color(238, 240, 240));
+		LBtotaltext_2_1.setBounds(32, 596, 81, 28);
+		invPanel.add(LBtotaltext_2_1);
+		
+		JLabel lblVnd_1_1 = new JLabel("vnd");
+		lblVnd_1_1.setHorizontalAlignment(SwingConstants.LEFT);
+		lblVnd_1_1.setForeground(new Color(245, 245, 245));
+		lblVnd_1_1.setFont(new Font("Visby Round CF", Font.PLAIN, 14));
+		lblVnd_1_1.setBackground(new Color(238, 240, 240));
+		lblVnd_1_1.setBounds(292, 604, 32, 16);
+		invPanel.add(lblVnd_1_1);
+		
+		 LBrefund = new JLabel("");
+		LBrefund.setHorizontalAlignment(SwingConstants.RIGHT);
+		LBrefund.setForeground(new Color(245, 245, 245));
+		LBrefund.setFont(new Font("Visby Round CF", Font.PLAIN, 17));
+		LBrefund.setBackground(new Color(238, 240, 240));
+		LBrefund.setBounds(138, 596, 144, 28);
+		invPanel.add(LBrefund);
+		
+		LBwarning_invoice = new JLabel("");
+		LBwarning_invoice.setHorizontalAlignment(SwingConstants.CENTER);
+		LBwarning_invoice.setForeground(new Color(220, 14, 19));
+		LBwarning_invoice.setFont(new Font("Bahnschrift", Font.PLAIN, 14));
+		LBwarning_invoice.setBackground(new Color(236, 15, 20));
+		LBwarning_invoice.setBounds(21, 86, 344, 30);
+		invPanel.add(LBwarning_invoice);
 		
 		//-----------------------------------------------------------------------------------------------------------------------//
 		
@@ -472,7 +543,7 @@ public class MainView extends JFrame {
 		IPsearch_dashboard.setText("Search");
 		IPsearch_dashboard.setBorder(new MatteBorder(0, 0, 2, 0, (Color) new Color(230, 230, 230)));
 		IPsearch_dashboard.setBackground(new Color(20, 23, 24));
-		IPsearch_dashboard.setBounds(190, 56, 381, 40);
+		IPsearch_dashboard.setBounds(161, 55, 381, 40);
 		IPsearch_dashboard.setCaretColor(new Color(20,23,24));
 		DashboardPanel.add(IPsearch_dashboard);
 		IPsearch_dashboard.setColumns(10);
@@ -687,7 +758,7 @@ public class MainView extends JFrame {
 		LBtotaltext_1_1.setForeground(new Color(56, 185, 199));
 		LBtotaltext_1_1.setFont(new Font("Visby Round CF ExtraBold", Font.PLAIN, 25));
 		LBtotaltext_1_1.setBackground(new Color(245, 195, 34));
-		LBtotaltext_1_1.setBounds(298, 13, 154, 32);
+		LBtotaltext_1_1.setBounds(275, 20, 154, 32);
 		DashboardPanel.add(LBtotaltext_1_1);
 		
 		 LBshowProduct = new JLabel("");
@@ -942,43 +1013,29 @@ public class MainView extends JFrame {
 		
 		HomePanel = new JPanel();
 		HomePanel.setForeground(new Color(58, 197, 193));
-		HomePanel.setBackground(new Color(20, 23, 24));
+		HomePanel.setBackground(new Color(5, 4, 5));
 		CardPanel.add(HomePanel, "name_26379143641400");
 		HomePanel.setLayout(null);
 		
 		JLabel LBlogoclient = new JLabel("");
-		LBlogoclient.setBounds(1041, 15, 32, 36);
+		LBlogoclient.setBounds(1053, 14, 32, 36);
 		HomePanel.add(LBlogoclient);
 		LBlogoclient.setIcon(new ImageIcon(
 				Toolkit.getDefaultToolkit().createImage(LoginView.class.getResource("/image/unknown.png"))));
 		
-		LBnameclient = new JLabel("Hello , ");
-		LBnameclient.setBounds(398, 34, 300, 58);
-		HomePanel.add(LBnameclient);
-		LBnameclient.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseEntered(MouseEvent e) {
-				LBnameclient.setForeground(new Color(28,233,255));
-				
-			}
-			@Override
-			public void mouseExited(MouseEvent e) {
-				
-				LBnameclient.setForeground(new Color(245, 245, 245));
-			}
-		});
-		LBnameclient.setHorizontalAlignment(SwingConstants.CENTER);
-		LBnameclient.setBackground(new Color(238, 240, 240));
-		LBnameclient.setForeground(new Color(245, 245, 245));
-		LBnameclient.setFont(new Font("Visby Round CF ExtraBold", Font.BOLD, 33));
+		LBnameuser = new JLabel("admin");
+		LBnameuser.setHorizontalAlignment(SwingConstants.RIGHT);
+		LBnameuser.setForeground(new Color(245, 245, 245));
+		LBnameuser.setFont(new Font("Visby Round CF ExtraBold", Font.BOLD, 13));
+		LBnameuser.setBackground(new Color(238, 240, 240));
+		LBnameuser.setBounds(869, 23, 179, 22);
+		HomePanel.add(LBnameuser);
 		
-		LBnameclient_1 = new JLabel("admin");
-		LBnameclient_1.setHorizontalAlignment(SwingConstants.RIGHT);
-		LBnameclient_1.setForeground(new Color(245, 245, 245));
-		LBnameclient_1.setFont(new Font("Visby Round CF ExtraBold", Font.BOLD, 13));
-		LBnameclient_1.setBackground(new Color(238, 240, 240));
-		LBnameclient_1.setBounds(918, 24, 118, 22);
-		HomePanel.add(LBnameclient_1);
+		LBbanner_home = new JLabel("");
+		LBbanner_home.setBounds(-26, 56, 1127, 706);
+		HomePanel.add(LBbanner_home);
+		LBbanner_home.setIcon(new ImageIcon(
+				Toolkit.getDefaultToolkit().createImage(MainView.class.getResource("/image/banner_home.png"))));
 		
 		SalesOrderPanel = new JPanel();
 		SalesOrderPanel.setBackground(new Color(20, 23, 24));
@@ -990,7 +1047,7 @@ public class MainView extends JFrame {
 		LBtotaltext_1_1_3.setForeground(new Color(56, 185, 199));
 		LBtotaltext_1_1_3.setFont(new Font("Visby Round CF ExtraBold", Font.PLAIN, 25));
 		LBtotaltext_1_1_3.setBackground(new Color(245, 195, 34));
-		LBtotaltext_1_1_3.setBounds(316, 42, 169, 32);
+		LBtotaltext_1_1_3.setBounds(316, 23, 169, 32);
 		SalesOrderPanel.add(LBtotaltext_1_1_3);
 		
 		//---------------------------------------------------------------------------------------------//
@@ -998,7 +1055,7 @@ public class MainView extends JFrame {
 		ListTable_order = new JScrollPane();		
 		ListTable_order.setBorder(new LineBorder(new Color(32, 36, 38), 10, true));
 		ListTable_order.setBackground(new Color(20, 23, 24));
-		ListTable_order.setBounds(55, 130, 700, 606);
+		ListTable_order.setBounds(55, 130, 702, 606);
 		SalesOrderPanel.add(ListTable_order);
 		
 		Table_order = new JTable();
@@ -1044,30 +1101,173 @@ public class MainView extends JFrame {
 		Table_order.setDefaultRenderer(Object.class, new view.renderers.CustomTableCellRenderer());
 		CardPanel.add(DashboardPanel);
 		
+		IPsearch_order = new JTextField();
+		IPsearch_order.setCaretColor(new Color(240, 240, 240));
+		IPsearch_order.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				IPsearch_order.setText("");
+				IPsearch_order.setCaretColor(new Color(240,240,240));
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				IPsearch_order.setText("Search");
+				IPsearch_order.setCaretPosition(0);
+				IPsearch_order.setCaretColor(new Color(20,23,24));
+			}
+		});
+		IPsearch_order.setFont(new Font("Visby Round CF ExtraBold", Font.PLAIN, 14));
+		IPsearch_order.setForeground(new Color(240, 240, 240));
+		IPsearch_order.setText("Search");
+		IPsearch_order.setBorder(new MatteBorder(0, 0, 2, 0, (Color) new Color(230, 230, 230)));
+		IPsearch_order.setBackground(new Color(20, 23, 24));
+		IPsearch_order.setBounds(206, 68, 381, 40);
+		IPsearch_order.setCaretColor(new Color(20,23,24));
 		
-		BsalesOrder.setVisible(false);
-		Bpayment.setVisible(false);
+		SalesOrderPanel.add(IPsearch_order);
+		
+		JLabel LBday = new JLabel("Day");
+		LBday.setHorizontalAlignment(SwingConstants.CENTER);
+		LBday.setForeground(new Color(245, 245, 245));
+		LBday.setFont(new Font("Visby Round CF ExtraBold", Font.BOLD, 14));
+		LBday.setBounds(811, 183, 48, 30);
+		SalesOrderPanel.add(LBday);
+		
+		IPday = new JTextField();
+		IPday.setHorizontalAlignment(SwingConstants.CENTER);
+		IPday.setForeground(new Color(245, 245, 245));
+		IPday.setFont(new Font("Visby Round CF DemiBold", Font.BOLD, 15));
+		IPday.setColumns(10);
+		IPday.setCaretColor(Color.WHITE);
+		IPday.setBorder(new MatteBorder(0, 0, 2, 0, (Color) new Color(240, 240, 240)));
+		IPday.setBackground(new Color(20, 23, 24));
+		IPday.setBounds(814, 212, 48, 24);
+		SalesOrderPanel.add(IPday);
+		IPday.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				LBday.setForeground(new Color(245,195,34));
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				LBday.setForeground(new Color(245, 245, 245));
+			}
+		});
+		
+		Bsearch_order = new JButton("Search");
+		Bsearch_order.setMargin(new Insets(8, 14, 2, 14));
+		Bsearch_order.setForeground(new Color(20, 23, 24));
+		Bsearch_order.setFont(new Font("Visby Round CF Heavy", Font.BOLD, 18));
+		Bsearch_order.setFocusable(false);
+		Bsearch_order.setBackground(new Color(20, 23, 24));
+		Bsearch_order.setBounds(814, 290, 101, 30);
+		SalesOrderPanel.add(Bsearch_order);
+		Bsearch_order.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				Bsearch_order.setForeground(new Color(28,233,255));
+				Bsearch_order.setBorderPainted(false);
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				Bsearch_order.setForeground(new Color(28, 32, 34));
+				Bsearch_order.setBorderPainted(true);
+			}
+		});
+		
+		LBmonth = new JLabel("Month");
+		LBmonth.setHorizontalAlignment(SwingConstants.CENTER);
+		LBmonth.setForeground(new Color(245, 245, 245));
+		LBmonth.setFont(new Font("Visby Round CF ExtraBold", Font.BOLD, 14));
+		LBmonth.setBounds(889, 183, 60, 30);
+		SalesOrderPanel.add(LBmonth);
+		
+		IPmonth = new JTextField();
+		IPmonth.setHorizontalAlignment(SwingConstants.CENTER);
+		IPmonth.setForeground(new Color(245, 245, 245));
+		IPmonth.setFont(new Font("Visby Round CF DemiBold", Font.BOLD, 15));
+		IPmonth.setColumns(10);
+		IPmonth.setCaretColor(Color.WHITE);
+		IPmonth.setBorder(new MatteBorder(0, 0, 2, 0, (Color) new Color(240, 240, 240)));
+		IPmonth.setBackground(new Color(20, 23, 24));
+		IPmonth.setBounds(892, 213, 59, 24);
+		SalesOrderPanel.add(IPmonth);
+		IPmonth.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				LBmonth.setForeground(new Color(245,195,34));
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				LBmonth.setForeground(new Color(245, 245, 245));
+			}
+		});
+		
+		LByear = new JLabel("Year");
+		LByear.setHorizontalAlignment(SwingConstants.CENTER);
+		LByear.setForeground(new Color(245, 245, 245));
+		LByear.setFont(new Font("Visby Round CF ExtraBold", Font.BOLD, 14));
+		LByear.setBounds(980, 183, 48, 30);
+		SalesOrderPanel.add(LByear);
+		
+		IPyear = new JTextField();
+		IPyear.setHorizontalAlignment(SwingConstants.CENTER);
+		IPyear.setForeground(new Color(245, 245, 245));
+		IPyear.setFont(new Font("Visby Round CF DemiBold", Font.BOLD, 15));
+		IPyear.setColumns(10);
+		IPyear.setCaretColor(Color.WHITE);
+		IPyear.setBorder(new MatteBorder(0, 0, 2, 0, (Color) new Color(240, 240, 240)));
+		IPyear.setBackground(new Color(20, 23, 24));
+		IPyear.setBounds(980, 213, 55, 24);
+		SalesOrderPanel.add(IPyear);
+		IPyear.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				LByear.setForeground(new Color(245,195,34));
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				LByear.setForeground(new Color(245, 245, 245));
+			}
+		});
+		
+		JLabel LBsince = new JLabel("SINCE");
+		LBsince.setHorizontalAlignment(SwingConstants.CENTER);
+		LBsince.setForeground(new Color(56, 185, 199));
+		LBsince.setFont(new Font("Visby Round CF ExtraBold", Font.BOLD, 23));
+		LBsince.setBounds(881, 137, 81, 30);
+		SalesOrderPanel.add(LBsince);
+		
+		LBnotificate_order = new JLabel("");
+		LBnotificate_order.setHorizontalAlignment(SwingConstants.CENTER);
+		LBnotificate_order.setForeground(new Color(56, 185, 199));
+		LBnotificate_order.setFont(new Font("Bahnschrift", Font.PLAIN, 14));
+		LBnotificate_order.setBackground(new Color(56, 185, 199));
+		LBnotificate_order.setBounds(767, 350, 324, 30);
+		SalesOrderPanel.add(LBnotificate_order);
+		
+		BrefreshOrder = new JButton("Refresh");
+		BrefreshOrder.setMargin(new Insets(8, 14, 2, 14));
+		BrefreshOrder.setForeground(new Color(20, 23, 24));
+		BrefreshOrder.setFont(new Font("Visby Round CF Heavy", Font.BOLD, 18));
+		BrefreshOrder.setFocusable(false);
+		BrefreshOrder.setBackground(new Color(20, 23, 24));
+		BrefreshOrder.setBounds(935, 290, 110, 30);
+		SalesOrderPanel.add(BrefreshOrder);
+		BrefreshOrder.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				BrefreshOrder.setForeground(new Color(28,233,255));
+				BrefreshOrder.setBorderPainted(false);
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				BrefreshOrder.setForeground(new Color(28, 32, 34));
+				BrefreshOrder.setBorderPainted(true);
+			}
+		});
+		
 	}
 	//----------------------------------------------------------------------------------------------------------------//
-	public void addActionListener(ActionListener listener) {
-		
-		//---------Switch Panel --------------------------//
-		
-        BdashboardForm.addActionListener(listener);
-        BproductForm.addActionListener(listener);
-//        BsettingForm.addActionListener(listener);
-        BsalesOrder.addActionListener(listener);
-        Bsignout.addActionListener(listener);
-        
-      //-----------Manage Product -------------------------//
-        
-        Badd.addActionListener(listener);
-        Bdelete.addActionListener(listener);
-        Bupdate.addActionListener(listener);
-        
-      //---------------------------------------------------//
-        Bpayment.addActionListener(listener);
-        
-        
-    }
+
 }

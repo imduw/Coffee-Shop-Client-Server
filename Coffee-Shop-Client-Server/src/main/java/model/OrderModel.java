@@ -4,7 +4,7 @@ import javax.persistence.*;
 import javax.xml.bind.annotation.XmlElement;
 import java.util.Date;
 @Entity
-@Table(name = "order")
+@Table(name = "orders")
 public class OrderModel {
 	
 	@Id

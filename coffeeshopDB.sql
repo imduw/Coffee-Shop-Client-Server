@@ -1,0 +1,7 @@
+accountCREATE TABLE `order` (
+    ID INTEGER NOT NULL AUTO_INCREMENT,
+    Creator VARCHAR(255),
+    Date TIMESTAMP,
+    Total INTEGER,
+    PRIMARY KEY (ID)
+) ENGINE=InnoDB;

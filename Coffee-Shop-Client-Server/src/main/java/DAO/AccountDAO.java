@@ -8,6 +8,7 @@ import org.hibernate.query.Query;
 
 import model.AccountModel;
 import model.ProductModel;
+import model.UserModel;
 import util.HibernateAPI;
 
 public class AccountDAO {
@@ -21,6 +22,7 @@ public class AccountDAO {
                 Session session = sessionFactory.openSession();
                 try {
                     transaction = session.beginTransaction();
+                    session.saveOrUpdate(account.getUser());
                     session.saveOrUpdate(account);
                     transaction.commit();
                 } catch (Exception e) {
@@ -65,7 +67,33 @@ public class AccountDAO {
         return exists;
     }
 	
-	
+	public AccountModel getAccountByUsername(String username) {
+        Transaction transaction = null;
+        AccountModel account = null;
+        try {
+            SessionFactory sessionFactory = HibernateAPI.getSessionFactory();
+            if (sessionFactory != null) {
+                Session session = sessionFactory.openSession();
+                try {
+                    transaction = session.beginTransaction();
+                    Query<AccountModel> query = session.createQuery("FROM AccountModel WHERE username = :username", AccountModel.class);
+                    query.setParameter("username", username);
+                    account = query.uniqueResult();
+                    transaction.commit();
+                } catch (Exception e) {
+                    if (transaction != null) {
+                        transaction.rollback();
+                    }
+                    e.printStackTrace();
+                } finally {
+                    session.close();
+                }
+            }
+        } catch (HibernateException e) {
+            e.printStackTrace();
+        }
+        return account;
+    }
 	
 	
 	public boolean checkLogin(String username, String password) {
@@ -128,4 +156,29 @@ public class AccountDAO {
         }
         return isPasswordChanged;
     }
+	
+	public UserModel getUserByAccountUsername(String username) {
+        UserModel user = null;
+        try {
+            SessionFactory sessionFactory = HibernateAPI.getSessionFactory();
+            if (sessionFactory != null) {
+                try {
+                    Session session = sessionFactory.openSession();
+                    String hql = "FROM AccountModel a WHERE a.username = :username";
+                    Query<AccountModel> query = session.createQuery(hql, AccountModel.class);
+                    query.setParameter("username", username);
+                    AccountModel account = query.uniqueResult();
+                    if (account != null) {
+                        user = account.getUser();
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return user;
+    }
+	
 }

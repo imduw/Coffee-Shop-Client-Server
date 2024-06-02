@@ -33,5 +33,6 @@
         <mapping class="model.ProductModel"/>
         <mapping class="model.OrderModel"/>
         <mapping class="model.AccountModel"/>
+        <mapping class="model.UserModel"/>
     </session-factory>
 </hibernate-configuration>

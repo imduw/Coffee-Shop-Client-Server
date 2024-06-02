@@ -26,8 +26,7 @@ public class AdminController implements ActionListener {
 			this.mv = mv;
 			this.lv = lv;
 			this.productModel = productModel;
-			this.mv.addActionListener(this);
-			this.lv.addActionListener(this);
+
 			
 			lv.Bsignup.addActionListener((e)->{
 				lv.CardPanel_login.removeAll();
@@ -54,12 +53,7 @@ public class AdminController implements ActionListener {
 				mv.CardPanel.repaint();
 				mv.CardPanel.revalidate();
 			});
-//			mv.BsettingForm.addActionListener((e)->{
-//				mv.CardPanel.removeAll();
-//				mv.CardPanel.add(mv.SettingPanel);
-//				mv.CardPanel.repaint();
-//				mv.CardPanel.revalidate();
-//			});
+
 			mv.BhomeForm.addActionListener((e)->{
 				mv.CardPanel.removeAll();
 				mv.CardPanel.add(mv.HomePanel);
@@ -75,6 +69,7 @@ public class AdminController implements ActionListener {
 			});
 			
 			mv.Bsignout.addActionListener((e)->{
+				lv.IPpassword.setText("");
 				mv.setVisible(false);
 				lv.setVisible(true);
 				

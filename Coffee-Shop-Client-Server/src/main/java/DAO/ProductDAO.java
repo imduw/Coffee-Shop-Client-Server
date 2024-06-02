@@ -162,6 +162,9 @@ public class ProductDAO {
 		return products;
 	}
     
+	
+	
+	
 	public List<ProductModel> getByNameProduct(String keyword) {
 		List<ProductModel> products = null;
 		try {
@@ -169,11 +172,9 @@ public class ProductDAO {
 			if (sessionFactory != null) {
 				try {
 					Session session = sessionFactory.openSession();
-//				    Transaction tx = session.beginTransaction(); 
 					String hql = "FROM ProductModel p WHERE LOWER(p.productName) LIKE :keyword";
 					Query<ProductModel> query = session.createQuery(hql, ProductModel.class);
 					query.setParameter("keyword", "%" + keyword.toLowerCase() + "%");
-//				    tx.commit();
 					products = query.list();
 				} catch (Exception e) {
 

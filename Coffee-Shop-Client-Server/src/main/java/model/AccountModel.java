@@ -1,88 +1,74 @@
 package model;
 
 import javax.persistence.*;
-import javax.xml.bind.annotation.XmlElement;
 
 @Entity
 @Table(name = "account")
 public class AccountModel {
-	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	
-	private Integer ID;
-	
-    
-	private String Username;
-	
-	
-	private String Password;
-	
-	
-	private String Role;
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
 
-	public AccountModel(Integer iD, String username, String password, String role) {
-		
-		this.ID = iD;
-		this.Username = username;
-		this.Password = password;
-		this.Role = role;
-	}
+    private String username;
 
+    private String password;
 
-	public AccountModel() {
-		
-	}
+    private String role;
 
+    @OneToOne
+    @JoinColumn(name = "user_id")
+    private UserModel user;
 
-	public Integer getID() {
-		return ID;
-	}
+    // Constructors
+    public AccountModel() {
+    }
 
+    public AccountModel(Integer id, String username, String password, String role) {
+        this.id = id;
+        this.username = username;
+        this.password = password;
+        this.role = role;
+    }
 
-	public void setID(Integer iD) {
-		ID = iD;
-	}
+    // Getters and Setters
+    public Integer getId() {
+        return id;
+    }
 
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
-	public String getUsername() {
-		return Username;
-	}
+    public String getUsername() {
+        return username;
+    }
 
+    public void setUsername(String username) {
+        this.username = username;
+    }
 
-	public void setUsername(String username) {
-		Username = username;
-	}
+    public String getPassword() {
+        return password;
+    }
 
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
-	public String getPassword() {
-		return Password;
-	}
+    public String getRole() {
+        return role;
+    }
 
+    public void setRole(String role) {
+        this.role = role;
+    }
 
-	public void setPassword(String password) {
-		Password = password;
-	}
+    public UserModel getUser() {
+        return user;
+    }
 
-
-	public String getRole() {
-		return Role;
-	}
-
-
-	public void setRole(String role) {
-		Role = role;
-	}
-
-
-	
-
-	
-	
-	
-	
-	
-	
-	
+    public void setUser(UserModel user) {
+        this.user = user;
+    }
 }

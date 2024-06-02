@@ -4,6 +4,7 @@ import java.awt.EventQueue;
 import java.util.Date;
 
 import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
@@ -33,25 +34,40 @@ public class Main {
 			public void run() {
 				try {
 					UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-					LoginView loginview = new LoginView();
-					ProductDAO productDAO = new ProductDAO();
-					ProductModel productModel = new ProductModel();  
-					MainView mainView = new MainView();
-					OrderDAO orderDAO = new OrderDAO();
-					OrderModel orderModel = new OrderModel();
-					OrderController orderController = new OrderController(orderDAO, orderModel, mainView, loginview);
-					ProductController productController = new ProductController(productDAO, mainView, loginview, productModel);					
-					TableController tableController = new TableController(productController, orderController, mainView, productDAO, orderDAO);
-				    AdminController adminController = new AdminController(mainView,loginview,productModel);
-				    AccountDAO accountDAO = new AccountDAO();
-				    AccountController accountController =new AccountController(accountDAO, mainView, loginview);
-					loginview.setVisible(true);
+					initialize();
+				} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
+						| UnsupportedLookAndFeelException e) {
 					
-				    
-				} catch (Exception e) {
 					e.printStackTrace();
 				}
+				
+		
 			}
 		});
 	}
+	
+	private static void initialize() {
+        
+        LoginView loginview = new LoginView();
+        MainView mainView = new MainView();
+        
+        
+        ProductDAO productDAO = new ProductDAO();
+        OrderDAO orderDAO = new OrderDAO();
+        AccountDAO accountDAO = new AccountDAO();
+        
+        
+        ProductModel productModel = new ProductModel();
+        OrderModel orderModel = new OrderModel();
+        
+        
+        OrderController orderController = new OrderController(orderDAO, orderModel, mainView, loginview);
+        ProductController productController = new ProductController(productDAO, mainView, loginview, productModel);
+        TableController tableController = new TableController(productController, orderController, mainView, productDAO, orderDAO);
+        AdminController adminController = new AdminController(mainView, loginview, productModel);
+        AccountController accountController = new AccountController(accountDAO, mainView, loginview);
+        
+        
+        loginview.setVisible(true);
+    }
 }

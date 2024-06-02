@@ -38,7 +38,7 @@ public class LoginView extends JFrame {
 	public JTextField IPuserSU;
 	public JPasswordField IPpasswordSU;
 	public JPasswordField IPpasswordSU2;
-	public JTextField IPemailSU;
+	public JTextField IPfirstName;
 	public JButton Blogin;
 	public JButton BsignupSU;
 	public JButton Bsignup;
@@ -48,6 +48,8 @@ public class LoginView extends JFrame {
 	public JButton BloginSU;
 	public JLabel LBwarning_login;
 	public JLabel LBwarningSU;
+	private JLabel LBfirstName;
+	public JTextField IPlastName;
 	public LoginView() {
 		
 		
@@ -121,14 +123,25 @@ public class LoginView extends JFrame {
 		lblDontHaveAn.setBounds(59, 535, 154, 14);
 		PloginArea.add(lblDontHaveAn);
 		
-		 Blogin = new JButton("Login");
-		
+		 Blogin = new JButton("Login");		
 		Blogin.setForeground(new Color(30, 39, 49));
 		Blogin.setFont(new Font("Visby Round CF Heavy", Font.BOLD, 19));
 		Blogin.setBackground(new Color(30, 39, 49));
 		Blogin.setBounds(137, 405, 177, 39);
 		Blogin.setFocusable(false);
 		PloginArea.add(Blogin);
+		Blogin.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				Blogin.setForeground(new Color(245,195,34));
+				Blogin.setBorderPainted(false);
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				Blogin.setForeground(new Color(30, 39, 49));
+				Blogin.setBorderPainted(true);
+			}
+		});
 		
 		Bsignup = new JButton("Sign up");
 		Bsignup.setForeground(new Color(30, 39, 49));
@@ -137,6 +150,18 @@ public class LoginView extends JFrame {
 		Bsignup.setBounds(214, 529, 84, 22);
 		Bsignup.setFocusable(false);
 		PloginArea.add(Bsignup);
+		Bsignup.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				Bsignup.setForeground(new Color(245,195,34));
+				Bsignup.setBorderPainted(false);
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				Bsignup.setForeground(new Color(30, 39, 49));
+				Bsignup.setBorderPainted(true);
+			}
+		});
 		
 		LBwarning_login = new JLabel("");
 		LBwarning_login.setHorizontalAlignment(SwingConstants.CENTER);
@@ -174,24 +199,24 @@ public class LoginView extends JFrame {
 		LBsignup.setHorizontalAlignment(SwingConstants.CENTER);
 		LBsignup.setFont(new Font("Visby Round CF ExtraBold", Font.PLAIN, 60));
 		LBsignup.setForeground(new Color(255, 255, 255));
-		LBsignup.setBounds(10, 42, 409, 85);
+		LBsignup.setBounds(15, 28, 403, 85);
 		Psu.add(LBsignup);
 		
 		JLabel LBusersignup = new JLabel("");
-		LBusersignup.setBounds(55, 211, 37, 40);
+		LBusersignup.setBounds(41, 204, 37, 40);
 		Psu.add(LBusersignup);
 		LBusersignup.setIcon(new ImageIcon(
 				Toolkit.getDefaultToolkit().createImage(LoginView.class.getResource("/image/user.png"))));
 		Plogin.add(LBimage);
 		
 		JLabel LBpasswordsignup = new JLabel("");
-		LBpasswordsignup.setBounds(58, 277, 28, 40);
+		LBpasswordsignup.setBounds(44, 270, 28, 40);
 		Psu.add(LBpasswordsignup);
 		LBpasswordsignup.setIcon(new ImageIcon(
 				Toolkit.getDefaultToolkit().createImage(LoginView.class.getResource("/image/password.png"))));
 		
 		JLabel LBpasswordsignup_1 = new JLabel("");
-		LBpasswordsignup_1.setBounds(59, 357, 28, 40);
+		LBpasswordsignup_1.setBounds(45, 350, 28, 40);
 		Psu.add(LBpasswordsignup_1);
 		LBpasswordsignup_1.setIcon(new ImageIcon(
 				Toolkit.getDefaultToolkit().createImage(LoginView.class.getResource("/image/password.png"))));
@@ -202,7 +227,7 @@ public class LoginView extends JFrame {
 		IPuserSU.setFont(new Font("Visby Round CF", Font.PLAIN, 15));
 		IPuserSU.setBorder(new MatteBorder(0, 0, 2, 0, (Color) new Color(255, 255, 255)));
 		IPuserSU.setBackground(new Color(30, 39, 49));
-		IPuserSU.setBounds(100, 208, 275, 41);
+		IPuserSU.setBounds(86, 201, 275, 41);
 		Psu.add(IPuserSU);
 		IPuserSU.setColumns(10);
 		
@@ -210,16 +235,28 @@ public class LoginView extends JFrame {
 		BsignupSU.setForeground(new Color(30, 39, 49));
 		BsignupSU.setFont(new Font("Visby Round CF Heavy", Font.BOLD, 19));
 		BsignupSU.setBackground(new Color(30, 39, 49));
-		BsignupSU.setBounds(148, 435, 152, 40);
+		BsignupSU.setBounds(142, 435, 152, 40);
 		BsignupSU.setFocusable(false);
 		Psu.add(BsignupSU);
+		BsignupSU.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				BsignupSU.setForeground(new Color(245,195,34));
+				BsignupSU.setBorderPainted(false);
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				BsignupSU.setForeground(new Color(30, 39, 49));
+				BsignupSU.setBorderPainted(true);
+			}
+		});
 		
 		IPpasswordSU = new JPasswordField();
 		IPpasswordSU.setForeground(new Color(255, 255, 255));
 		IPpasswordSU.setCaretColor(new Color(255, 255, 255));
 		IPpasswordSU.setBorder(new MatteBorder(0, 0, 2, 0, (Color) new Color(255, 255, 255)));
 		IPpasswordSU.setBackground(new Color(30, 39, 49));
-		IPpasswordSU.setBounds(100, 277, 275, 40);
+		IPpasswordSU.setBounds(86, 270, 275, 40);
 		Psu.add(IPpasswordSU);
 		
 		IPpasswordSU2 = new JPasswordField();
@@ -228,7 +265,7 @@ public class LoginView extends JFrame {
 		IPpasswordSU2.setCaretColor(Color.WHITE);
 		IPpasswordSU2.setBorder(new MatteBorder(0, 0, 2, 0, (Color) new Color(255, 255, 255)));
 		IPpasswordSU2.setBackground(new Color(30, 39, 49));
-		IPpasswordSU2.setBounds(100, 352, 275, 40);
+		IPpasswordSU2.setBounds(86, 345, 275, 40);
 		Psu.add(IPpasswordSU2);
 		
 		JLabel lblNewLabel = new JLabel("Already have an account ?");
@@ -244,38 +281,86 @@ public class LoginView extends JFrame {
 		BloginSU.setBounds(225, 529, 75, 21);
 		BloginSU.setFocusable(false);
 		Psu.add(BloginSU);
+		BloginSU.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				BloginSU.setForeground(new Color(245,195,34));
+				BloginSU.setBorderPainted(false);
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				BloginSU.setForeground(new Color(30, 39, 49));
+				BloginSU.setBorderPainted(true);
+			}
+		});
 		
-		JLabel LBusersignup_2 = new JLabel("");
-		LBusersignup_2.setBounds(60, 141, 28, 40);
-		LBusersignup_2.setIcon(new ImageIcon(
-				Toolkit.getDefaultToolkit().createImage(LoginView.class.getResource("/image/email.png"))));
-		Psu.add(LBusersignup_2);
+		IPfirstName = new JTextField();
+		IPfirstName.setHorizontalAlignment(SwingConstants.CENTER);
+		IPfirstName.setForeground(Color.WHITE);
+		IPfirstName.setFont(new Font("Visby Round CF DemiBold", Font.PLAIN, 15));
+		IPfirstName.setColumns(10);
+		IPfirstName.setCaretColor(Color.WHITE);
+		IPfirstName.setBorder(new MatteBorder(0, 0, 2, 0, (Color) new Color(255, 255, 255)));
+		IPfirstName.setBackground(new Color(30, 39, 49));
+		IPfirstName.setBounds(85, 157, 125, 32);
+		Psu.add(IPfirstName);
+		IPfirstName.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				LBfirstName.setForeground(new Color(245,195,34));
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				LBfirstName.setForeground(Color.WHITE);
+			}
+		});
 		
-		IPemailSU = new JTextField();
-		IPemailSU.setForeground(Color.WHITE);
-		IPemailSU.setFont(new Font("Visby Round CF", Font.PLAIN, 15));
-		IPemailSU.setColumns(10);
-		IPemailSU.setCaretColor(Color.WHITE);
-		IPemailSU.setBorder(new MatteBorder(0, 0, 2, 0, (Color) new Color(255, 255, 255)));
-		IPemailSU.setBackground(new Color(30, 39, 49));
-		IPemailSU.setBounds(100, 135, 275, 41);
-		Psu.add(IPemailSU);
-		
-		LBwarningSU = new JLabel("User account or password incorrect");
+		LBwarningSU = new JLabel("");
 		LBwarningSU.setHorizontalAlignment(SwingConstants.CENTER);
 		LBwarningSU.setForeground(new Color(236, 15, 20));
 		LBwarningSU.setFont(new Font("Visby Round CF DemiBold", Font.PLAIN, 13));
-		LBwarningSU.setBounds(19, 403, 399, 21);
+		LBwarningSU.setBounds(31, 403, 387, 21);
 		Psu.add(LBwarningSU);
+		
+		LBfirstName = new JLabel("First Name");
+		LBfirstName.setHorizontalAlignment(SwingConstants.CENTER);
+		LBfirstName.setForeground(Color.WHITE);
+		LBfirstName.setFont(new Font("Visby Round CF", Font.PLAIN, 15));
+		LBfirstName.setBounds(101, 141, 87, 21);
+		Psu.add(LBfirstName);
+		
+		JLabel LBlastName = new JLabel("Last Name");
+		LBlastName.setHorizontalAlignment(SwingConstants.CENTER);
+		LBlastName.setForeground(Color.WHITE);
+		LBlastName.setFont(new Font("Visby Round CF", Font.PLAIN, 15));
+		LBlastName.setBounds(247, 141, 87, 21);
+		Psu.add(LBlastName);
+		
+		IPlastName = new JTextField();
+		IPlastName.setHorizontalAlignment(SwingConstants.CENTER);
+		IPlastName.setForeground(Color.WHITE);
+		IPlastName.setFont(new Font("Visby Round CF DemiBold", Font.PLAIN, 15));
+		IPlastName.setColumns(10);
+		IPlastName.setCaretColor(Color.WHITE);
+		IPlastName.setBorder(new MatteBorder(0, 0, 2, 0, (Color) new Color(255, 255, 255)));
+		IPlastName.setBackground(new Color(30, 39, 49));
+		IPlastName.setBounds(231, 157, 125, 32);
+		Psu.add(IPlastName);
+		IPlastName.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				LBlastName.setForeground(new Color(245,195,34));
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				LBlastName.setForeground(Color.WHITE);
+			}
+		});
+		
 		Plogin.add(LBimage);
 		
 		
 		
 		
-	}
-	
-	public void addActionListener(ActionListener listener) {
-			Blogin.addActionListener(listener);
-	        
 	}
 }

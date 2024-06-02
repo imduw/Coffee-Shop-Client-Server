@@ -34,6 +34,7 @@ public class TableController {
         this.orderDAO = orderDAO;
         
         mv.BdashboardForm.addActionListener((e)->{
+        	mv.Brefresh_invoice.doClick();
         	dashboardProductTable();
         });
         mv.BproductForm.addActionListener((e)->{
@@ -52,16 +53,47 @@ public class TableController {
         	
         });
         
-//        mv.BsalesOrder.addActionListener((e)->{
-//        	refreshOrderTable(mv.Table_order);
-//        });
+        mv.BsalesOrder.addActionListener((e)->{
+        	 
+        	refreshOrderTable(mv.Table_order);
+        });
         
+        mv.Bsearch_order.addActionListener((e)->{
+        	try {
+				int year = Integer.parseInt(mv.IPyear.getText());
+				int month = Integer.parseInt(mv.IPmonth.getText());
+				int day = Integer.parseInt(mv.IPday.getText());
+				if(mv.IPday.getText().isEmpty() || mv.IPmonth.getText().isEmpty() ||mv.IPyear.getText().isEmpty()) {
+					mv.LBnotificate_order.setText("Fill in the date");
+				}else if(year < 0 || month < 1 || month > 12 || day < 1 || day > 31) {
+					mv.LBnotificate_order.setText("Invalid date");
+				}else {
+					List<OrderModel> orders = orderDAO.getByDateOrder(year, month, day);
+				    searchOrder(mv.Table_order, orders);
+				}
+			} catch (NumberFormatException e1) {
+				mv.LBnotificate_order.setText("Invalid date");
+				
+			}
+        	
+            
+        });
+        mv.BrefreshOrder.addActionListener((e)->{     
+        	refreshOrderTable(mv.Table_order);
+        	mv.IPday.setText("");
+        	mv.IPmonth.setText("");
+        	mv.IPyear.setText("");
+        	mv.LBnotificate_order.setText("");
+        });
         
-        
+        mv.IPsearch_order.addActionListener((e)->{
+        	List<OrderModel> orders = orderDAO.getByNameOrder(mv.IPsearch_order.getText());      	
+        	searchOrder(mv.Table_order, orders);
+        });;
        
         mv.IPsearch_dashboard.addActionListener((e)->{
         	List<ProductModel> products = productDAO.getByNameProduct(mv.IPsearch_dashboard.getText());        	
-        	searchProduct_Product(mv.Table_dasboard, products);
+        	searchProduct_Dashboard(mv.Table_dasboard, products);
         });
         
         mv.IPsearch_product.addActionListener((e)->{    
@@ -71,8 +103,10 @@ public class TableController {
         
  
         
-        mv.Badd_invoice.addActionListener((e)->{
+        mv.Badd_invoice.addActionListener((e)->{     	
         	addInvoice();
+
+        	
         });
         mv.Brefresh_invoice.addActionListener((e)->{
         	DefaultTableModel model = (DefaultTableModel) mv.Table_invoice.getModel();
@@ -81,6 +115,9 @@ public class TableController {
         	mv.LBshowPrice.setText("");
         	mv.LBshowProduct.setText("");
         	mv.IPquantity.setText("");
+        	mv.IPreceive.setText("");
+        	mv.LBrefund.setText("");
+        	mv.LBwarning_invoice.setText("");
         	dashboardProductTable();
         	
         });
@@ -142,31 +179,55 @@ public class TableController {
     
     
 //--------------------------------------------------------------------------------------------------------//
+ 
+    
     
     public void addInvoice() {
-    	try {
-			if (!mv.IPquantity.getText().isEmpty() 
-					&& Integer.valueOf(mv.IPquantity.getText()) > 0
-					&& !mv.LBshowPrice.getText().isEmpty()
-					&& !mv.LBshowProduct.getText().isEmpty()) {
-				int Total = Integer.valueOf(mv.LBshowPrice.getText()) * Integer.valueOf(mv.IPquantity.getText());
-				DefaultTableModel model = (DefaultTableModel) mv.Table_invoice.getModel();
+        String quantityText = mv.IPquantity.getText();
+        String priceText = mv.LBshowPrice.getText();
+        String productText = mv.LBshowProduct.getText();
 
-				model.addRow(new Object[] { mv.LBshowProduct.getText(), mv.IPquantity.getText(), Total });
-				mv.LBwarning_dashboard.setText("");
-				resetBill();
-			} else {
-				if (mv.LBshowProduct.getText().isEmpty()) {
-					mv.LBwarning_dashboard.setText("Please select product");
-				} else {
-					mv.LBwarning_dashboard.setText("Please enter quantity");
-				}
-			}
-		} catch (NumberFormatException e1) {
-			JOptionPane.showMessageDialog(null, "Connect failed !");
-			e1.printStackTrace();
-		}
+        if (productText.isEmpty()) {
+            mv.LBwarning_dashboard.setText("Please select a product");
+            return;
+        }
+        
+        if (quantityText.isEmpty()) {
+            mv.LBwarning_dashboard.setText("Please enter quantity");
+            return;
+        }
+
+        int quantity;
+        try {
+            quantity = Integer.parseInt(quantityText);
+            if (quantity <= 0) {
+                mv.LBwarning_dashboard.setText("Quantity must be greater than 0");
+                return;
+            }
+        } catch (NumberFormatException e) {
+            mv.LBwarning_dashboard.setText("Invalid quantity");
+            return;
+        }
+
+        
+
+        int price;
+        try {
+            price = Integer.parseInt(priceText);
+        } catch (NumberFormatException e) {
+            mv.LBwarning_dashboard.setText("Invalid price");
+            return;
+        }
+
+        int total = price * quantity;
+        DefaultTableModel model = (DefaultTableModel) mv.Table_invoice.getModel();
+        model.addRow(new Object[]{productText, quantity, total});
+        mv.LBwarning_dashboard.setText("");
+        resetBill();
     }
+
+    
+
     public void dashboardProductTable() {
     	
         List<ProductModel> productList = productController.getAllProducts();       
@@ -228,6 +289,22 @@ public class TableController {
         }    
         table.setModel(model);                     
     }
+    
+    public void searchOrder(JTable table, List<OrderModel> orderlist) {
+        DefaultTableModel model = (DefaultTableModel) table.getModel();
+        model.setRowCount(0);
+        
+        for (OrderModel order : orderlist) {        	             
+            model.addRow(new Object[]{order.getID(),
+            						  order.getCreator(),
+        						      order.getTotal(),
+                                      order.getDate()
+                                      
+                                   	 });
+        }
+        table.setModel(model);
+    }
+    
     
     public void searchProduct_Dashboard(JTable table, List<ProductModel> productList) {
         DefaultTableModel model = (DefaultTableModel) table.getModel();
